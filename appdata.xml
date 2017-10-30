@@ -8,11 +8,11 @@
 
   <description>
     <p>
-      MuseScore is an open source and free music notation software. For support, contribution &amp; bug reports, visit MuseScore.org.
+      MuseScore is an open source and free music notation software. For support, contribution and bug reports, visit MuseScore.org.
     </p>
     <p>Features:</p>
     <ul>
-      <li>WYSIWYG design, notes are entered on a "virtual notepaper"</li>
+      <li>WYSIWYG design, notes are entered on a “virtual notepaper”</li>
       <li>TrueType font(s) for printing &amp; display allows for high quality scaling to all sizes</li>
       <li>Easy &amp; fast note entry</li>
       <li>Many editing functions</li>
@@ -30,7 +30,7 @@
     </screenshot>
   </screenshots>
 
-  <url type="homepage">https://musescore.org/</url>
+  <url type="homepage">https://musescore.org</url>
   <updatecontact>jurf_AT_riseup.net</updatecontact>
 
 </application>
