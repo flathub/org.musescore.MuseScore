@@ -13,9 +13,7 @@
     "--share=ipc",
     "--socket=x11",
     "--socket=pulseaudio",
-    "--filesystem=home",
-    "--env=QT_QPA_PLATFORM=flatpak",
-    "--env=QT_QPA_FLATPAK_PLATFORM=xcb"
+    "--filesystem=home"
   ],
   "build-options": {
     "cflags": "-O2 -g",
