@@ -1,5 +1,7 @@
 {
   "app-id": "org.musescore.MuseScore",
+  "base": "io.qt.qtwebkit.BaseApp",
+  "base-version": "stable",
   "runtime": "org.kde.Platform",
   "runtime-version": "5.9",
   "sdk": "org.kde.Sdk",
@@ -13,43 +15,13 @@
     "--share=ipc",
     "--socket=x11",
     "--socket=pulseaudio",
-    "--filesystem=home"
+    "--filesystem=host"
   ],
   "build-options": {
     "cflags": "-O2 -g",
-    "cxxflags": "-O2 -g",
-    "env": {
-      "V": "1"
-    }
+    "cxxflags": "-O2 -g"
   },
   "modules": [
-    {
-      "name": "qtwebkit",
-      "buildsystem": "simple",
-      "cleanup-platform": [
-        "/bin",
-        "/mkspecs"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/qt/qtwebkit/archive/v5.212.0-alpha2.tar.gz",
-          "sha256": "6db43b931f64857cfda7bcf89914e2730b82164871a8c24c1881620e6bfdeca1"
-        }
-      ],
-      "build-commands": [
-        "qmake",
-        "grep -rl '/usr/local' . | xargs sed -i 's|/usr/local|/app|g'",
-        "make",
-        "find . -name \"cmake_install.cmake\" | xargs sed -i 's|/usr|/app|g'",
-        "make install"
-      ],
-      "cleanup": [
-        "/include",
-        "/lib/cmake",
-        "/lib/pkgconfig"
-      ]
-    },
     "shared-modules/lame/lame-3.99.5.json",
     {
       "name": "musescore",
