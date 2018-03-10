@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 Juraj Fiala <jurf_AT_riseup.net> -->
+<application>
+  <id type="desktop">mscore.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>MuseScore</name>
+  <summary>Create, playback, and print sheet music for free</summary>
+  <icon type="remote" height="128" width="128">https://github.com/musescore/MuseScore/raw/67b189f8dfccc2691a4e3f3bf8e8cd445454c963/assets/musescore-icon-round-128.png</icon>
+  <icon type="remote" height="64" width="64">https://github.com/musescore/MuseScore/raw/67b189f8dfccc2691a4e3f3bf8e8cd445454c963/assets/musescore-icon-round-64.png</icon>
+
+  <description>
+    <p>
+      Create, playback, and print sheet music for free. MuseScore is cross-platform, multi-lingual, open source music notation software. It features an easy to use WYSIWYG editor with audio score playback for results that look and sound beautiful. It supports unlimited staves with up to four voices each, dynamics, articulations, lyrics, chords, lead sheet notation, import/export of MIDI and MusicXML, export to PDF and WAV, plus online score sharing.
+    </p>
+    <p>
+      MuseScore can upload scores directly to the score sharing site musescore.com. Program support is provided on musescore.org.
+    </p>
+    <p>
+      Features supported by MuseScore include:
+    </p>
+    <ul>
+      <li>Unlimited score length</li>
+      <li>Unlimited number of staves per system</li>
+      <li>Up to four independent voices per staff</li>
+      <li>Score creation wizard and templates</li>
+      <li>Automatic part extraction and transposition</li>
+      <li>Repeats, including segnos, codas, and measure repeats</li>
+      <li>Dynamics, articulations, and other expression markings, with playback support for most</li>
+      <li>Custom text markings</li>
+      <li>Lyrics</li>
+      <li>Chord symbols</li>
+      <li>Jazz notation, including lead sheets, slash notation and a “handwritten” font for text</li>
+      <li>Swing and shuffle playback</li>
+      <li>Mixer for instrument levels and effects</li>
+      <li>Percussion notation</li>
+      <li>Early music notation</li>
+      <li>Cross-staff beaming</li>
+      <li>Import of graphics</li>
+      <li>Custom key signatures</li>
+      <li>Additive time signatures</li>
+      <li>User-defined score styles</li>
+    </ul>
+    <p>
+      Most elements in MuseScore are laid out automatically but can also be positioned manually. The capabilities of MuseScore can be extended via plugins, and the growing repository on musescore.org contains many plugins submitted by users.
+    </p>
+    <p>
+      MuseScore includes a set of sounds that reproduce common instruments (as defined by General MIDI) without taking up a lot of disk space or memory, but you can also substitute any SoundFont you prefer for a wider variety of sounds or for more realism.
+    </p>
+    <p>
+      MuseScore can import and export MIDI and MusicXML files, and it can also import from Capella and several other programs. MuseScore can export to PDF, PNG, and other graphic formats, to WAV and other audio formats, or to Lilypond for an alternative layout and print option.
+    </p>
+  </description>
+
+  <categories>
+    <category>Qt</category>
+    <category>Audio</category>
+    <category>Sequencer</category>
+    <category>Midi</category>
+    <category>AudioVideoEditing</category>
+    <category>AudioVideoEditing</category>
+    <category>Music</category>
+    <category>AudioVideo</category>
+  </categories>
+
+  <url type="homepage">https://musescore.org</url>
+  <url type="bugtracker">https://musescore.org/en/project/issues/musescore</url>
+  <url type="faq">https://musescore.org/en/faq</url>
+  <url type="help">https://musescore.org/en/handbook</url>
+  <url type="donation">https://musescore.org/en/donate</url>
+  <url type="translate">https://musescore.org/administrative-guidelines/translation-instructions</url>
+
+  <launchable type="desktop-id">mscore.desktop</launchable>
+
+  <releases>
+    <release version="2.1.0" date="2017-05-02"/>
+  </releases>
+
+  <project_license>GPL-2.0</project_license>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Jazz leadsheet</caption>
+      <image>https://c1.staticflickr.com/9/8650/16220689964_c5acd71ca7_h_d.jpg</image>
+    </screenshot>
+    <screenshot>
+      <caption>Inspector for a note</caption>
+      <image>https://c1.staticflickr.com/9/8647/16843045205_5c1a309148_h_d.jpg</image>
+    </screenshot>
+    <screenshot>
+      <caption>Piano score showing some elements in the palette</caption>
+      <image>https://c1.staticflickr.com/9/8621/16655673190_7f5d4af692_h_d.jpg</image>
+    </screenshot>
+    <screenshot>
+      <caption>Start Center</caption>
+      <image>https://c1.staticflickr.com/9/8661/16656913789_0916c21005_c_d.jpg</image>
+    </screenshot>
+  </screenshots>
+
+  <update_contact>jurf_AT_riseup.net</update_contact>
+  <translation>qt</translation>
+
+</application>

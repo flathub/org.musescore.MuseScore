@@ -37,8 +37,7 @@
       ],
       "post-install": [
         "mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml",
-        "mkdir -p /app/share/appdata",
-        "install -Dm644 appdata.xml /app/share/appdata/mscore.appdata.xml",
+        "install -Dm644 -t /app/share/appdata mscore.appdata.xml",
         "sed -i 's|<!--  <generic-icon name=\"audio-x-generic\"/> Uncomment to use generic audio file icon -->|<generic-icon name=\"audio-x-generic\"/>|' /app/share/mime/packages/org.musescore.MuseScore.xml"
       ],
       "sources": [
@@ -49,7 +48,7 @@
         },
         {
           "type": "file",
-          "path": "appdata.xml"
+          "path": "mscore.appdata.xml"
         }
       ]
     }
