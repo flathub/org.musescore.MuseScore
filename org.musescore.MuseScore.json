@@ -3,7 +3,7 @@
   "base": "io.qt.qtwebkit.BaseApp",
   "base-version": "stable",
   "runtime": "org.kde.Platform",
-  "runtime-version": "5.10",
+  "runtime-version": "5.9",
   "sdk": "org.kde.Sdk",
   "command": "musescore",
   "rename-desktop-file": "mscore.desktop",
