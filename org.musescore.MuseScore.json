@@ -44,7 +44,7 @@
         {
           "type": "archive",
           "url": "https://github.com/musescore/MuseScore/archive/v2.2.tar.gz",
-          "sha256": "a56de0ef5d93819d6ad43136b7cb8de4ecc6b28e151e85c7797affa360cfb3d0"
+          "sha256": "5e9a95b984650476f8d9e4f3bbcbddff3ca47be6beb58d14677f865f00acd5e2"
         },
         {
           "type": "file",
