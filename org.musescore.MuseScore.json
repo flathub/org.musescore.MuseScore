@@ -17,10 +17,6 @@
     "--socket=pulseaudio",
     "--filesystem=host"
   ],
-  "build-options": {
-    "cflags": "-O2 -g",
-    "cxxflags": "-O2 -g"
-  },
   "modules": [
     "shared-modules/lame/lame-3.99.5.json",
     {
