@@ -72,7 +72,7 @@
   <launchable type="desktop-id">mscore.desktop</launchable>
 
   <releases>
-    <release version="2.1.0" date="2017-05-02"/>
+    <release version="2.2" date="2018-03-26"/>
   </releases>
 
   <project_license>GPL-2.0</project_license>
