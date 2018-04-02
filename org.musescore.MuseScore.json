@@ -43,6 +43,10 @@
           "sha256": "5e9a95b984650476f8d9e4f3bbcbddff3ca47be6beb58d14677f865f00acd5e2"
         },
         {
+          "type": "patch",
+          "path": "without-portaudio-fix.patch"
+        },
+        {
           "type": "file",
           "path": "mscore.appdata.xml"
         }

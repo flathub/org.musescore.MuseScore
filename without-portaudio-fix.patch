@@ -1,0 +1,64 @@
+From 591eb3d549f566180faa8ea9228e50ddfd05321f Mon Sep 17 00:00:00 2001
+From: Eric Fontaine <eric@ericfontainejazz.com>
+Date: Sun, 1 Apr 2018 19:35:20 -0400
+Subject: [PATCH] help allow build without PortMidi
+
+---
+ mscore/pa.cpp  | 3 +++
+ mscore/pa.h    | 2 ++
+ mscore/seq.cpp | 2 ++
+ 3 files changed, 7 insertions(+)
+
+diff --git a/mscore/pa.cpp b/mscore/pa.cpp
+index 6ae50fa794..a7fee8441c 100644
+--- a/mscore/pa.cpp
++++ b/mscore/pa.cpp
+@@ -277,6 +277,8 @@ void Portaudio::midiRead()
+ //   putEvent
+ //---------------------------------------------------------
+ 
++#ifdef USE_PORTMIDI
++
+ // Prevent killing sequencer with wrong data
+ #define less128(__less) ((__less >=0 && __less <= 127) ? __less : 0)
+ 
+@@ -349,6 +351,7 @@ void Portaudio::putEvent(const NPlayEvent& e, unsigned framePos)
+                   break;
+             }
+       }
++#endif
+ 
+ //---------------------------------------------------------
+ //   currentApi
+diff --git a/mscore/pa.h b/mscore/pa.h
+index e121a98fdf..6080b6f338 100644
+--- a/mscore/pa.h
++++ b/mscore/pa.h
+@@ -57,7 +57,9 @@ class Portaudio : public Driver {
+       virtual Transport getState() override;
+       virtual int sampleRate() const { return _sampleRate; }
+       virtual void midiRead();
++#ifdef USE_PORTMIDI
+       virtual void putEvent(const NPlayEvent&, unsigned framePos);
++#endif
+ 
+       int framePos() const;
+       float* getLBuffer(long n);
+diff --git a/mscore/seq.cpp b/mscore/seq.cpp
+index 5034006215..de8e477aeb 100644
+--- a/mscore/seq.cpp
++++ b/mscore/seq.cpp
+@@ -48,11 +48,13 @@
+ 
+ #include <vorbis/vorbisfile.h>
+ 
++#ifdef USE_PORTMIDI
+ #if defined(Q_OS_MAC) || defined(Q_OS_WIN)
+   #include "portmidi/porttime/porttime.h"
+ #else
+   #include <porttime.h>
+ #endif
++#endif
+ 
+ namespace Ms {
+ 
