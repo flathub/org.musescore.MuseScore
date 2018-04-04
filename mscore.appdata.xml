@@ -73,6 +73,7 @@
 
   <releases>
     <release version="2.2" date="2018-03-26"/>
+    <release version="2.1.0" date="2017-05-02"/>
   </releases>
 
   <project_license>GPL-2.0</project_license>
