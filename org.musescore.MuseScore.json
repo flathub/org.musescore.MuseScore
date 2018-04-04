@@ -5,12 +5,15 @@
   "runtime": "org.kde.Platform",
   "runtime-version": "5.9",
   "sdk": "org.kde.Sdk",
+  "sdk-extensions" : [
+    "org.freedesktop.Sdk.Extension.openjdk9"
+  ],
   "command": "musescore",
   "rename-desktop-file": "mscore.desktop",
   "rename-appdata-file": "mscore.appdata.xml",
   "rename-icon": "mscore",
   "finish-args": [
-    "--device=dri",
+    "--device=all",
     "--share=network",
     "--share=ipc",
     "--socket=x11",
@@ -20,13 +23,78 @@
   "modules": [
     "shared-modules/lame/lame-3.99.5.json",
     {
+      "name": "portaudio",
+      "config-opts": [
+        "--disable-static",
+        "--without-oss"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz",
+          "sha256": "f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513"
+        }
+      ],
+      "cleanup": [
+        "/lib/pkgconfig",
+        "/include",
+        "*.la"
+      ]
+    },
+    {
+      "name": "openjre",
+      "disabled": true,
+      "buildsystem": "simple",
+      "build-commands": [
+        "/usr/lib/sdk/openjdk9/install.sh"
+      ]
+    },
+    {
+      "name": "portmidi",
+      "build-options": {
+        "env": {
+          "PATH": "/usr/bin:/usr/lib/sdk/openjdk9/jvm/openjdk-9/bin",
+          "JAVA_HOME": "/usr/lib/sdk/openjdk9/jvm/openjdk-9"
+        }
+      },
+      "buildsystem": "cmake-ninja",
+      "post-install": [
+        "ln -s libportmidi.so /app/lib/libporttime.so"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip",
+          "sha256": "08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f"
+        },
+        {
+          "type": "patch",
+          "path": "portmidi-217-build-fix.patch"
+        },
+        {
+          "type": "shell",
+          "commands": [
+            "sed -i 's#/usr/local#/app#' */CMakeLists.txt pm_python/setup.py",
+            "sed -i 's#/usr/share#/app#' */CMakeLists.txt"
+          ]
+        }
+      ],
+      "cleanup": [
+        "/lib/pkgconfig",
+        "/include",
+        "*.a",
+        "*.la",
+        "/bin",
+        "/java"
+      ]
+    },
+    {
       "name": "musescore",
       "buildsystem": "cmake",
       "config-opts": [
         "-DCMAKE_BUILD_TYPE=RELEASE",
         "-DBUILD_ALSA=OFF",
         "-DBUILD_JACK=OFF",
-        "-DBUILD_PORTAUDIO=OFF",
         "-DUSE_SYSTEM_FREETYPE=ON"
       ],
       "build-commands": [
@@ -42,10 +110,6 @@
           "type": "archive",
           "url": "https://github.com/musescore/MuseScore/archive/v2.2.tar.gz",
           "sha256": "5e9a95b984650476f8d9e4f3bbcbddff3ca47be6beb58d14677f865f00acd5e2"
-        },
-        {
-          "type": "patch",
-          "path": "without-portaudio-fix.patch"
         },
         {
           "type": "file",
