@@ -26,7 +26,8 @@
         "-DCMAKE_BUILD_TYPE=RELEASE",
         "-DBUILD_ALSA=OFF",
         "-DBUILD_JACK=OFF",
-        "-DBUILD_PORTAUDIO=OFF"
+        "-DBUILD_PORTAUDIO=OFF",
+        "-DUSE_SYSTEM_FREETYPE=ON"
       ],
       "build-commands": [
         "make lrelease"
