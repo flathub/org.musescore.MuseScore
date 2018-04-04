@@ -42,14 +42,6 @@
       ]
     },
     {
-      "name": "openjre",
-      "disabled": true,
-      "buildsystem": "simple",
-      "build-commands": [
-        "/usr/lib/sdk/openjdk9/install.sh"
-      ]
-    },
-    {
       "name": "portmidi",
       "build-options": {
         "env": {
