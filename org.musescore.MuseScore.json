@@ -100,8 +100,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/musescore/MuseScore/archive/v2.2.tar.gz",
-          "sha256": "5e9a95b984650476f8d9e4f3bbcbddff3ca47be6beb58d14677f865f00acd5e2"
+          "url": "https://github.com/musescore/MuseScore/archive/v2.2.1.tar.gz",
+          "sha256": "261a39e34ee314780f75259ec2971acf69b5f4a2e0b2eb190acdb7fbbd4a89d6"
         },
         {
           "type": "file",

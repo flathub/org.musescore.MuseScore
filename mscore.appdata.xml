@@ -72,6 +72,7 @@
   <launchable type="desktop-id">mscore.desktop</launchable>
 
   <releases>
+    <release version="2.2.1" date="2018-04-03"/>
     <release version="2.2" date="2018-03-26"/>
     <release version="2.1.0" date="2017-05-02"/>
   </releases>
