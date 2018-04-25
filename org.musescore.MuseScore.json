@@ -18,8 +18,7 @@
     "--share=ipc",
     "--socket=x11",
     "--socket=pulseaudio",
-    "--filesystem=host",
-    "--env=TMPDIR=$XDG_CACHE_HOME"
+    "--filesystem=host"
   ],
   "modules": [
     "shared-modules/lame/lame-3.99.5.json",
@@ -96,6 +95,7 @@
       "post-install": [
         "mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml",
         "install -Dm644 -t /app/share/appdata mscore.appdata.xml",
+        "install -t /app/bin musescore",
         "sed -i 's|<!--  <generic-icon name=\"audio-x-generic\"/> Uncomment to use generic audio file icon -->|<generic-icon name=\"audio-x-generic\"/>|' /app/share/mime/packages/org.musescore.MuseScore.xml"
       ],
       "sources": [
@@ -107,6 +107,13 @@
         {
           "type": "file",
           "path": "mscore.appdata.xml"
+        },
+        {
+          "type": "script",
+          "dest-filename": "musescore",
+          "commands": [
+            "exec env TMPDIR=$XDG_CACHE_HOME /app/bin/mscore \"$@\""
+          ]
         }
       ]
     }
