@@ -18,7 +18,8 @@
     "--share=ipc",
     "--socket=x11",
     "--socket=pulseaudio",
-    "--filesystem=host"
+    "--filesystem=host",
+    "--env=TMPDIR=$XDG_CACHE_HOME"
   ],
   "modules": [
     "shared-modules/lame/lame-3.99.5.json",
