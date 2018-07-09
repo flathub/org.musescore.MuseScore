@@ -96,6 +96,7 @@
         "mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml",
         "install -Dm644 -t /app/share/appdata mscore.appdata.xml",
         "install -t /app/bin musescore",
+        "sed -i 's|mscore|musescore|' /app/share/applications/mscore.desktop",
         "sed -i 's|<!--  <generic-icon name=\"audio-x-generic\"/> Uncomment to use generic audio file icon -->|<generic-icon name=\"audio-x-generic\"/>|' /app/share/mime/packages/org.musescore.MuseScore.xml"
       ],
       "sources": [
