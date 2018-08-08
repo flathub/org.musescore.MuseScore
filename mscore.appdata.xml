@@ -93,6 +93,11 @@
 
   <update_contact>jurf_AT_riseup.net</update_contact>
   <translation>qt</translation>
+  
+  <kudos>
+    <kudo>ModernToolkit</kudo>
+    <kudo>UserDocs</kudo>
+  </kudos>
 
   <releases>
     <release version="2.3.2" date="2018-07-31">
