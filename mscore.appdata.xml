@@ -135,6 +135,7 @@
           <li>#274803: MDL Workspace Not Displayed After Installation</li>
           <li>Disable "Upload Score" menu item while uploading custom audio, to prevent uploading different scores at the same time with slow internet connection speed.</li>
         </ul>
+      </description>
     </release>
 
     <release version="2.3.1" date="2018-07-06">
@@ -154,7 +155,7 @@
       </description>
     </release>
 
-    <release version="2.3" date=2018-06-29">
+    <release version="2.3" date="2018-06-29">
       <description>
         <p>
           New features
