@@ -106,21 +106,21 @@
           After the release of MuseScore 2.3.1 on July 6th 2018, we found a couple of regressions that we addressed in MuseScore 2.3.2, released on July 31st 2018. We also updated all languages to latest translations.
         </p>
         <p>
-          Features
+          Features:
         </p>
         <ul>
           <li>#208006: Embed MP3 support by default on macOS</li>
           <li>Add access to MuseScore version and revision used to create a score in plugin framework</li>
         </ul>
         <p>
-          Improvements
+          Improvements:
         </p>
         <ul>
           <li>#274258: Zerberus: add support for "global_volume=" opcode</li>
           <li>#274396: Zerberus (SFZ) instruments are too quiet compared to SoundFont instruments</li>
         </ul>
         <p>
-          Fixes
+          Fixes:
         </p>
         <ul>
           <li>#12971: Same note in different voices and lengths plays only the length of the shortest note</li>
@@ -144,7 +144,7 @@
           After the release of MuseScore 2.3 on June 29th 2018, we found a couple of regressions that we addressed in MuseScore 2.3.1 released on July 6th 2018. We also updated all languages to latest translations.
         </p>
         <p>
-          Bug Fixes
+          Bug Fixes:
         </p>
         <ul>
           <li>Fix #273921: [Regression] Augm. dot misplaced for low stemless notes</li>
@@ -158,7 +158,7 @@
     <release version="2.3" date="2018-06-29">
       <description>
         <p>
-          New features
+          New features:
         </p>
         <ul>
           <li>#273032: Implement extensions to provide an easy way to install soundfont, templates and instruments.xml</li>
@@ -169,7 +169,7 @@
           <li>Implemented flams and crush notation for unpitched percussion</li>
         </ul>
         <p>
-          Playback
+          Playback:
         </p>
         <ul>
           <li>Fix #270996: No sound on upgrade to 2.2 if default soundfont was saved as default</li>
@@ -177,7 +177,7 @@
           <li>Fix #272377: 'Follow text' is not applied to tempo text</li>
         </ul>
         <p>
-          Zerberus
+          Zerberus:
         </p>
         <ul>
           <li>Fix #222031: remove ties and spanners when removing induvidual notes within a chord</li>
@@ -189,7 +189,7 @@
           <li>Fix #273241: incorrect loading sample when use comment line</li>
         </ul>
         <p>
-          User interface
+          User interface:
         </p>
         <ul>
           <li>#273511: Order notes in Drum Input Palette like in instruments.xml</li>
@@ -206,7 +206,7 @@
           <li>Fix #272153: Notes for transposing instrument are shown in concert pitch on piano control</li>
         </ul>
         <p>
-          Crashes and corruptions fixed
+          Crashes and corruptions fixed:
         </p>
         <ul>
           <li>Fix #76751: MuseScore crashes when opening plugin manager after adding new plugin</li>
@@ -219,7 +219,7 @@
           <li>Fix crash in MusicXML import when drumset instrument has no midi-unpitched</li>
         </ul>
         <p>
-          Score layout
+          Score layout:
         </p>
         <ul>
           <li>Fix #253926: Key signature not displaying correctly on clef change at the start of a score</li>
@@ -236,7 +236,7 @@
           <li>Fix #273305: Courtesy clef hide/show issue</li>
         </ul>
         <p>
-          Instruments
+          Instruments:
         </p>
         <ul>
           <li>Reworked instruments.xml</li>
@@ -245,7 +245,7 @@
           <li>Don't show presets for more strings than the instrument is set up for, esp. counting only fretted strings, i.e. non-open strings</li>
         </ul>
         <p>
-          Import/Export
+          Import/Export:
         </p>
         <ul>
           <li>Fix #271707: MusicXML export: crash when exporting hairpins</li>
@@ -253,7 +253,7 @@
           <li>Fix #272062: Opening of some MusicXML files caused MuseScore to crash</li>
         </ul>
         <p>
-          Miscellaneous
+          Miscellaneous:
         </p>
         <ul>
           <li>Fix #270496: Add missing elements to incomplete tuplets when reading from a file</li>
