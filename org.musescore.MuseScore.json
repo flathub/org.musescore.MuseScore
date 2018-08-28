@@ -1,7 +1,7 @@
 {
   "app-id": "org.musescore.MuseScore",
   "base": "io.qt.qtwebkit.BaseApp",
-  "base-version": "stable",
+  "base-version": "5.9",
   "runtime": "org.kde.Platform",
   "runtime-version": "5.9",
   "sdk": "org.kde.Sdk",
