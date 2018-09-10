@@ -87,8 +87,7 @@
       "config-opts": [
         "-DCMAKE_BUILD_TYPE=RELEASE",
         "-DBUILD_ALSA=OFF",
-        "-DBUILD_JACK=OFF",
-        "-DUSE_SYSTEM_FREETYPE=ON"
+        "-DBUILD_JACK=OFF"
       ],
       "build-commands": [
         "make lrelease"
