@@ -5,8 +5,8 @@
   <metadata_license>CC0-1.0</metadata_license>
   <name>MuseScore</name>
   <summary>Create, playback, and print sheet music for free</summary>
-  <icon type="remote" height="128" width="128">https://github.com/musescore/MuseScore/raw/67b189f8dfccc2691a4e3f3bf8e8cd445454c963/assets/musescore-icon-round-128.png</icon>
-  <icon type="remote" height="64" width="64">https://github.com/musescore/MuseScore/raw/67b189f8dfccc2691a4e3f3bf8e8cd445454c963/assets/musescore-icon-round-64.png</icon>
+  <icon type="remote" height="128" width="128">https://raw.githubusercontent.com/musescore/MuseScore/master/assets/musescore-icon-round-128.png</icon>
+  <icon type="remote" height="64" width="64">https://raw.githubusercontent.com/musescore/MuseScore/master/assets/musescore-icon-round-64.png</icon>
 
   <description>
     <p>
