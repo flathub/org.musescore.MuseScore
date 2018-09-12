@@ -74,20 +74,32 @@
 
   <screenshots>
     <screenshot type="default">
-      <caption>Jazz leadsheet</caption>
-      <image>https://c1.staticflickr.com/9/8650/16220689964_c5acd71ca7_h_d.jpg</image>
-    </screenshot>
-    <screenshot>
-      <caption>Inspector for a note</caption>
-      <image>https://c1.staticflickr.com/9/8647/16843045205_5c1a309148_h_d.jpg</image>
-    </screenshot>
-    <screenshot>
-      <caption>Piano score showing some elements in the palette</caption>
-      <image>https://c1.staticflickr.com/9/8621/16655673190_7f5d4af692_h_d.jpg</image>
-    </screenshot>
-    <screenshot>
       <caption>Start Center</caption>
-      <image>https://c1.staticflickr.com/9/8661/16656913789_0916c21005_c_d.jpg</image>
+      <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/01-start-center.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Main application window</caption>
+      <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/02-main-window.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Note Inspector</caption>
+      <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/03-inspector.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Score playback with Piano Keyboard</caption>
+      <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/04-playback-piano.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Mixer and Play panels</caption>
+      <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/05-panels.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Master Palette</caption>
+      <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/06-master-palette.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>New Score Wizard</caption>
+      <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/07-new-score-wizard.png</image>
     </screenshot>
   </screenshots>
 
