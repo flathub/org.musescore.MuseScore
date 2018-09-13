@@ -33,6 +33,12 @@ finish-args:
   # (portals don’t work yet)
   - --filesystem=host
 
+build-options:
+  cppflags: "-O2 -D_FORTIFY_SOURCE=2"
+  cflags: "-O2 -g -fstack-protector-strong"
+  cxxflags: "-O2 -g -fstack-protector-strong"
+  ldflags: "-fstack-protector-strong -Wl,-z,relro,-z,now"
+
 modules:
   - shared-modules/lame/lame-3.99.5.json
 
