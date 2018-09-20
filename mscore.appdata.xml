@@ -51,17 +51,6 @@
     </p>
   </description>
 
-  <categories>
-    <category>Qt</category>
-    <category>Audio</category>
-    <category>Sequencer</category>
-    <category>Midi</category>
-    <category>AudioVideoEditing</category>
-    <category>AudioVideoEditing</category>
-    <category>Music</category>
-    <category>AudioVideo</category>
-  </categories>
-
   <url type="homepage">https://musescore.org</url>
   <url type="bugtracker">https://musescore.org/en/project/issues/musescore</url>
   <url type="faq">https://musescore.org/en/faq</url>
