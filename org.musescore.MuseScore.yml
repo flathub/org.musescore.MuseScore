@@ -1,10 +1,10 @@
 app-id:              org.musescore.MuseScore
 
 base:                io.qt.qtwebkit.BaseApp
-base-version:        '5.9'
+base-version:        '5.11'
 
 runtime:             org.kde.Platform
-runtime-version:     '5.9'
+runtime-version:     '5.11'
 
 sdk:                 org.kde.Sdk
 # We only need this to build PortAudio
