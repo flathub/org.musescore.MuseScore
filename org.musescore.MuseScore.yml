@@ -98,12 +98,19 @@ modules:
       # We need to that to override environment variables
       - install -t /app/bin musescore
       - sed -i 's|mscore|musescore|' /app/share/applications/mscore.desktop
-      - sed -i 's|<!--  <generic-icon name="audio-x-generic"/> Uncomment to use generic audio file icon -->|
-        <generic-icon name="audio-x-generic"/>|' /app/share/mime/packages/org.musescore.MuseScore.xml
+      # Add prefixes to mimetype icons so they can be exported
+      - cd /app/share/icons/hicolor;
+        for d in */mimetypes/; do
+          for f in ${d}*; do
+            mv "$f" "${d}org.musescore.MuseScore.$(basename $f)";
+          done;
+        done
     sources:
       - type: archive
         url: https://github.com/musescore/MuseScore/archive/v2.3.2.tar.gz
         sha256: 8d84a081ca03bdb0bbf706c2848064f27c3a6331033e313954133d44fb769aee
+      - type: patch
+        path: musescore-mime-use-appid-icons.patch
       - type: file
         path: mscore.appdata.xml
       - type: script
