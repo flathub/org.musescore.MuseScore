@@ -65,8 +65,8 @@ modules:
   - name: portmidi
     buildsystem: cmake-ninja
     build-options:
+      prepend-path: /usr/lib/sdk/openjdk9/jvm/openjdk-9/bin
       env:
-        PATH: /usr/bin:/usr/lib/sdk/openjdk9/jvm/openjdk-9/bin
         JAVA_HOME: /usr/lib/sdk/openjdk9/jvm/openjdk-9
     post-install:
       - ln -s libportmidi.so /app/lib/libporttime.so
