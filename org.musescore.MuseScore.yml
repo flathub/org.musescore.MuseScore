@@ -5,12 +5,7 @@ base-version:        '5.11'
 
 runtime:             org.kde.Platform
 runtime-version:     '5.11'
-
 sdk:                 org.kde.Sdk
-# We only need this to build PortAudio
-# It has a Java configuration app that can’t be disabled
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.openjdk9
 
 command:             musescore
 rename-desktop-file: mscore.desktop
@@ -64,29 +59,25 @@ modules:
 
   - name: portmidi
     buildsystem: cmake-ninja
-    build-options:
-      prepend-path: /usr/lib/sdk/openjdk9/jvm/openjdk-9/bin
-      env:
-        JAVA_HOME: /usr/lib/sdk/openjdk9/jvm/openjdk-9
+    config-opts:
+      - -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/app/lib
+      - -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=/app/lib
+      - -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app/bin
     post-install:
+      # MuseScore looks for this name for some reason
       - ln -s libportmidi.so /app/lib/libporttime.so
     sources:
       - type: archive
         url: https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip
         sha256: 08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f
       - type: patch
-        path: portmidi-217-build-fix.patch
-      - type: shell
-        commands:
-          - sed -i 's|/usr/local|/app|' */CMakeLists.txt pm_python/setup.py
-          - sed -i 's|/usr/share|/app|' */CMakeLists.txt
+        path: portmidi-no-java.patch
     cleanup:
+      - /bin
       - /lib/pkgconfig
       - /include
       - '*.a'
       - '*.la'
-      - /bin
-      - /java
 
 
   - name: musescore
