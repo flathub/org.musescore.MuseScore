@@ -72,8 +72,8 @@ modules:
         path: portmidi-217-build-fix.patch
       - type: shell
         commands:
-          - sed -i 's#/usr/local#/app#' */CMakeLists.txt pm_python/setup.py
-          - sed -i 's#/usr/share#/app#' */CMakeLists.txt
+          - sed -i 's|/usr/local|/app|' */CMakeLists.txt pm_python/setup.py
+          - sed -i 's|/usr/share|/app|' */CMakeLists.txt
     cleanup:
       - /lib/pkgconfig
       - /include
