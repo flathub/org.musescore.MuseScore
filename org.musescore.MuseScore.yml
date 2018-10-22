@@ -17,6 +17,11 @@ rename-desktop-file: mscore.desktop
 rename-appdata-file: mscore.appdata.xml
 rename-icon:         mscore
 
+cleanup-commands:
+  # Cleanup after QtWebKit
+  - rm -rf /app/include
+  - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
+
 finish-args:
   # X11 + XShm access
   - --share=ipc
