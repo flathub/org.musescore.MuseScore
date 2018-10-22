@@ -33,11 +33,12 @@ finish-args:
   # (portals don’t work yet)
   - --filesystem=host
 
+# From https://gitlab.com/freedesktop-sdk/freedesktop-sdk/blob/18.08/project.conf#L51
+# Can be removed after switching to the 5.12 SDK
 build-options:
-  cppflags: -O2 -D_FORTIFY_SOURCE=2
-  cflags: -O2 -g -fstack-protector-strong
-  cxxflags: -O2 -g -fstack-protector-strong
-  ldflags: -fstack-protector-strong -Wl,-z,relro,-z,now
+  cflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
+  cxxflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
+  ldflags: -Wl,--as-needed,-z,relro,-z,now
 
 modules:
   - shared-modules/lame/lame-3.99.5.json
