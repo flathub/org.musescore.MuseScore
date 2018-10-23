@@ -94,7 +94,7 @@
   <developer_name>MuseScore BVBA</developer_name>
   <update_contact>jurf_AT_riseup.net</update_contact>
   <translation>qt</translation>
-  
+
   <kudos>
     <kudo>ModernToolkit</kudo>
     <kudo>UserDocs</kudo>
@@ -270,7 +270,7 @@
     <release version="2.2" date="2018-03-26"/>
     <release version="2.1.0" date="2017-05-02"/>
   </releases>
-  
+
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
