@@ -7,7 +7,7 @@ runtime:             org.kde.Platform
 runtime-version:     '5.11'
 sdk:                 org.kde.Sdk
 
-command:             musescore
+command:             mscore
 rename-desktop-file: mscore.desktop
 rename-appdata-file: mscore.appdata.xml
 rename-icon:         mscore
@@ -32,6 +32,8 @@ finish-args:
   # Allow loading/saving files from anywhere
   # (portals don’t work yet)
   - --filesystem=host
+  # Allow other instances to see lockfiles
+  - --env=TMPDIR=/var/tmp
 
 # From https://gitlab.com/freedesktop-sdk/freedesktop-sdk/blob/18.08/project.conf#L51
 # Can be removed after switching to the 5.12 SDK
@@ -91,10 +93,6 @@ modules:
     post-install:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
       - install -Dm644 -t /app/share/appdata mscore.appdata.xml
-      # Overwrite the musescore symlink with our own shell file
-      # We need to that to override environment variables
-      - install -t /app/bin musescore
-      - sed -i 's|mscore|musescore|' /app/share/applications/mscore.desktop
       # Add prefixes to mimetype icons so they can be exported
       - cd /app/share/icons/hicolor;
         for d in */mimetypes/; do
@@ -110,7 +108,3 @@ modules:
         path: musescore-mime-use-appid-icons.patch
       - type: file
         path: mscore.appdata.xml
-      - type: script
-        dest-filename: musescore
-        commands:
-          - exec env TMPDIR=$XDG_CACHE_HOME /app/bin/mscore "$@"
