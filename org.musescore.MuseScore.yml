@@ -94,6 +94,7 @@ modules:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
       - install -Dm644 -t /app/share/appdata mscore.appdata.xml
       # Add prefixes to mimetype icons so they can be exported
+      # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
         for d in */mimetypes/; do
           for f in ${d}*; do
