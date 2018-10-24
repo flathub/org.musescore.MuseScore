@@ -12,11 +12,6 @@ rename-desktop-file: mscore.desktop
 rename-appdata-file: mscore.appdata.xml
 rename-icon:         mscore
 
-cleanup-commands:
-  # Cleanup after QtWebKit
-  - rm -rf /app/include
-  - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
-
 finish-args:
   # X11 + XShm access
   - --share=ipc
@@ -41,6 +36,11 @@ build-options:
   cflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
   cxxflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
   ldflags: -Wl,--as-needed,-z,relro,-z,now
+
+cleanup-commands:
+  # Cleanup after QtWebKit
+  - rm -rf /app/include
+  - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
 
 modules:
   - shared-modules/lame/lame-3.99.5.json
