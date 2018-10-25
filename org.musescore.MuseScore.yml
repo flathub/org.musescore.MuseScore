@@ -5,14 +5,9 @@ base-version:        '5.11'
 
 runtime:             org.kde.Platform
 runtime-version:     '5.11'
-
 sdk:                 org.kde.Sdk
-# We only need this to build PortAudio
-# It has a Java configuration app that can’t be disabled
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.openjdk9
 
-command:             musescore
+command:             mscore
 rename-desktop-file: mscore.desktop
 rename-appdata-file: mscore.appdata.xml
 rename-icon:         mscore
@@ -32,12 +27,20 @@ finish-args:
   # Allow loading/saving files from anywhere
   # (portals don’t work yet)
   - --filesystem=host
+  # Allow other instances to see lockfiles
+  - --env=TMPDIR=/var/tmp
 
+# From https://gitlab.com/freedesktop-sdk/freedesktop-sdk/blob/18.08/project.conf#L51
+# Can be removed after switching to the 5.12 SDK
 build-options:
-  cppflags: "-O2 -D_FORTIFY_SOURCE=2"
-  cflags: "-O2 -g -fstack-protector-strong"
-  cxxflags: "-O2 -g -fstack-protector-strong"
-  ldflags: "-fstack-protector-strong -Wl,-z,relro,-z,now"
+  cflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
+  cxxflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
+  ldflags: -Wl,--as-needed,-z,relro,-z,now
+
+cleanup-commands:
+  # Cleanup after QtWebKit
+  - rm -rf /app/include
+  - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
 
 modules:
   - shared-modules/lame/lame-3.99.5.json
@@ -53,34 +56,30 @@ modules:
     cleanup:
       - /lib/pkgconfig
       - /include
-      - "*.la"
+      - '*.la'
 
 
   - name: portmidi
     buildsystem: cmake-ninja
-    build-options:
-        env:
-            PATH: /usr/bin:/usr/lib/sdk/openjdk9/jvm/openjdk-9/bin
-            JAVA_HOME: /usr/lib/sdk/openjdk9/jvm/openjdk-9
+    config-opts:
+      - -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/app/lib
+      - -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=/app/lib
+      - -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app/bin
     post-install:
+      # MuseScore looks for this name for some reason
       - ln -s libportmidi.so /app/lib/libporttime.so
     sources:
       - type: archive
         url: https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip
         sha256: 08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f
       - type: patch
-        path: portmidi-217-build-fix.patch
-      - type: shell
-        commands:
-          - sed -i 's#/usr/local#/app#' */CMakeLists.txt pm_python/setup.py
-          - sed -i 's#/usr/share#/app#' */CMakeLists.txt
+        path: portmidi-no-java.patch
     cleanup:
+      - /bin
       - /lib/pkgconfig
       - /include
-      - "*.a"
-      - "*.la"
-      - /bin
-      - /java
+      - '*.a'
+      - '*.la'
 
 
   - name: musescore
@@ -94,19 +93,19 @@ modules:
     post-install:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
       - install -Dm644 -t /app/share/appdata mscore.appdata.xml
-      # Overwrite the musescore symlink with our own shell file
-      # We need to that to override environment variables
-      - install -t /app/bin musescore
-      - sed -i 's|mscore|musescore|' /app/share/applications/mscore.desktop
-      - sed -i 's|<!--  <generic-icon name="audio-x-generic"/> Uncomment to use generic audio file icon -->|
-        <generic-icon name="audio-x-generic"/>|' /app/share/mime/packages/org.musescore.MuseScore.xml
+      # Add prefixes to mimetype icons so they can be exported
+      # TODO: really, this bit could be nicer
+      - cd /app/share/icons/hicolor;
+        for d in */mimetypes/; do
+          for f in ${d}*; do
+            mv "$f" "${d}org.musescore.MuseScore.$(basename $f)";
+          done;
+        done
     sources:
       - type: archive
         url: https://github.com/musescore/MuseScore/archive/v2.3.2.tar.gz
         sha256: 8d84a081ca03bdb0bbf706c2848064f27c3a6331033e313954133d44fb769aee
+      - type: patch
+        path: musescore-mime-use-appid-icons.patch
       - type: file
         path: mscore.appdata.xml
-      - type: script
-        dest-filename: musescore
-        commands:
-          - exec env TMPDIR=$XDG_CACHE_HOME /app/bin/mscore "$@"
