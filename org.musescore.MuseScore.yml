@@ -9,7 +9,6 @@ sdk:                 org.kde.Sdk
 
 command:             mscore
 rename-desktop-file: mscore.desktop
-rename-appdata-file: mscore.appdata.xml
 rename-icon:         mscore
 
 finish-args:
@@ -92,7 +91,7 @@ modules:
       - make lrelease
     post-install:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
-      - install -Dm644 -t /app/share/appdata mscore.appdata.xml
+      - install -Dm644 -t /app/share/appdata org.musescore.MuseScore.appdata.xml
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -108,4 +107,4 @@ modules:
       - type: patch
         path: musescore-mime-use-appid-icons.patch
       - type: file
-        path: mscore.appdata.xml
+        path: org.musescore.MuseScore.appdata.xml
