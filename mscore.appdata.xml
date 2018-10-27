@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2018 Werner Schweer and others -->
 <component type="desktop">
-  <id>mscore.desktop</id>
+  <id>mscore</id>
   <metadata_license>CC0-1.0</metadata_license>
   <name>MuseScore</name>
   <summary>Create, playback, and print sheet music for free</summary>
