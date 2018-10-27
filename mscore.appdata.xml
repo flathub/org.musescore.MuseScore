@@ -2,9 +2,11 @@
 <!-- Copyright 2018 Werner Schweer and others -->
 <component type="desktop">
   <id>mscore</id>
-  <metadata_license>CC0-1.0</metadata_license>
   <name>MuseScore</name>
   <summary>Create, playback, and print sheet music for free</summary>
+  <launchable type="desktop-id">mscore.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
   <description>
     <p>
       Create, playback, and print sheet music for free. MuseScore is cross-platform, multi-lingual, open source music notation software. It features an easy to use WYSIWYG editor with audio score playback for results that look and sound beautiful. It supports unlimited staves with up to four voices each, dynamics, articulations, lyrics, chords, lead sheet notation, import/export of MIDI and MusicXML, export to PDF and WAV, plus online score sharing.
@@ -53,8 +55,6 @@
   <url type="help">https://musescore.org/en/handbook</url>
   <url type="donation">https://musescore.org/en/donate</url>
   <url type="translate">https://musescore.org/administrative-guidelines/translation-instructions</url>
-  <launchable type="desktop-id">mscore.desktop</launchable>
-  <project_license>GPL-2.0</project_license>
   <screenshots>
     <screenshot type="default">
       <caption>Start Center</caption>
