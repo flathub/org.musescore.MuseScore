@@ -87,7 +87,7 @@
   </screenshots>
   <developer_name>MuseScore BVBA</developer_name>
   <update_contact>jurf_AT_riseup.net</update_contact>
-  <translation>qt</translation>
+  <translation type="qt">mscore</translation>
   <kudos>
     <kudo>ModernToolkit</kudo>
     <kudo>UserDocs</kudo>
