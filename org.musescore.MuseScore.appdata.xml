@@ -2,11 +2,10 @@
 <!-- Copyright 2018 Werner Schweer and others -->
 <component type="desktop-application">
   <id>org.musescore.MuseScore</id>
+  <translation type="qt">mscore</translation>
   <name>MuseScore</name>
   <summary>Create, playback, and print sheet music for free</summary>
-  <launchable type="desktop-id">mscore.desktop</launchable>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0</project_license>
+  <developer_name>MuseScore BVBA</developer_name>
   <description>
     <p>
       Create, playback, and print sheet music for free. MuseScore is cross-platform, multi-lingual, open source music notation software. It features an easy to use WYSIWYG editor with audio score playback for results that look and sound beautiful. It supports unlimited staves with up to four voices each, dynamics, articulations, lyrics, chords, lead sheet notation, import/export of MIDI and MusicXML, export to PDF and WAV, plus online score sharing.
@@ -49,6 +48,12 @@
       MuseScore can import and export MIDI and MusicXML files, and it can also import from Capella and several other programs. MuseScore can export to PDF, PNG, and other graphic formats, to WAV and other audio formats, or to Lilypond for an alternative layout and print option.
     </p>
   </description>
+  <kudos>
+    <kudo>ModernToolkit</kudo>
+    <kudo>UserDocs</kudo>
+  </kudos>
+  <project_license>GPL-2.0</project_license>
+  <metadata_license>CC0-1.0</metadata_license>
   <url type="homepage">https://musescore.org</url>
   <url type="bugtracker">https://musescore.org/en/project/issues/musescore</url>
   <url type="faq">https://musescore.org/en/faq</url>
@@ -85,16 +90,7 @@
       <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/07-new-score-wizard.png</image>
     </screenshot>
   </screenshots>
-  <developer_name>MuseScore BVBA</developer_name>
-  <update_contact>jurf_AT_riseup.net</update_contact>
-  <translation type="qt">mscore</translation>
-  <kudos>
-    <kudo>ModernToolkit</kudo>
-    <kudo>UserDocs</kudo>
-  </kudos>
-  <provides>
-    <id>mscore.desktop</id>
-  </provides>
+  <content_rating type="oars-1.1"/>
   <releases>
     <release date="2018-07-31" version="2.3.2">
       <description>
@@ -262,5 +258,9 @@
     <release date="2018-03-26" version="2.2"/>
     <release date="2017-05-02" version="2.1.0"/>
   </releases>
-  <content_rating type="oars-1.1"/>
+  <provides>
+    <id>mscore.desktop</id>
+  </provides>
+  <launchable type="desktop-id">mscore.desktop</launchable>
+  <update_contact>jurf_AT_riseup.net</update_contact>
 </component>
