@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2018 Werner Schweer and others -->
-<application>
-  <id type="desktop">mscore.desktop</id>
-  <metadata_license>CC0-1.0</metadata_license>
+<component type="desktop-application">
+  <id>org.musescore.MuseScore</id>
+  <translation type="qt">mscore</translation>
   <name>MuseScore</name>
   <summary>Create, playback, and print sheet music for free</summary>
-  <icon type="remote" height="128" width="128">https://raw.githubusercontent.com/musescore/MuseScore/master/assets/musescore-icon-round-128.png</icon>
-  <icon type="remote" height="64" width="64">https://raw.githubusercontent.com/musescore/MuseScore/master/assets/musescore-icon-round-64.png</icon>
-
+  <developer_name>MuseScore BVBA</developer_name>
   <description>
     <p>
       Create, playback, and print sheet music for free. MuseScore is cross-platform, multi-lingual, open source music notation software. It features an easy to use WYSIWYG editor with audio score playback for results that look and sound beautiful. It supports unlimited staves with up to four voices each, dynamics, articulations, lyrics, chords, lead sheet notation, import/export of MIDI and MusicXML, export to PDF and WAV, plus online score sharing.
@@ -50,16 +48,18 @@
       MuseScore can import and export MIDI and MusicXML files, and it can also import from Capella and several other programs. MuseScore can export to PDF, PNG, and other graphic formats, to WAV and other audio formats, or to Lilypond for an alternative layout and print option.
     </p>
   </description>
-
+  <kudos>
+    <kudo>ModernToolkit</kudo>
+    <kudo>UserDocs</kudo>
+  </kudos>
+  <project_license>GPL-2.0</project_license>
+  <metadata_license>CC0-1.0</metadata_license>
   <url type="homepage">https://musescore.org</url>
   <url type="bugtracker">https://musescore.org/en/project/issues/musescore</url>
   <url type="faq">https://musescore.org/en/faq</url>
   <url type="help">https://musescore.org/en/handbook</url>
   <url type="donation">https://musescore.org/en/donate</url>
   <url type="translate">https://musescore.org/administrative-guidelines/translation-instructions</url>
-
-  <project_license>GPL-2.0</project_license>
-
   <screenshots>
     <screenshot type="default">
       <caption>Start Center</caption>
@@ -90,18 +90,9 @@
       <image>https://raw.githubusercontent.com/flathub/org.musescore.MuseScore/master/screenshots/07-new-score-wizard.png</image>
     </screenshot>
   </screenshots>
-
-  <developer_name>MuseScore BVBA</developer_name>
-  <update_contact>jurf_AT_riseup.net</update_contact>
-  <translation>qt</translation>
-
-  <kudos>
-    <kudo>ModernToolkit</kudo>
-    <kudo>UserDocs</kudo>
-  </kudos>
-
+  <content_rating type="oars-1.1"/>
   <releases>
-    <release version="2.3.2" date="2018-07-31">
+    <release date="2018-07-31" version="2.3.2">
       <description>
         <p>
           After the release of MuseScore 2.3.1 on July 6th 2018, we found a couple of regressions that we addressed in MuseScore 2.3.2, released on July 31st 2018. We also updated all languages to latest translations.
@@ -138,8 +129,7 @@
         </ul>
       </description>
     </release>
-
-    <release version="2.3.1" date="2018-07-06">
+    <release date="2018-07-06" version="2.3.1">
       <description>
         <p>
           After the release of MuseScore 2.3 on June 29th 2018, we found a couple of regressions that we addressed in MuseScore 2.3.1 released on July 6th 2018. We also updated all languages to latest translations.
@@ -155,8 +145,7 @@
         </ul>
       </description>
     </release>
-
-    <release version="2.3" date="2018-06-29">
+    <release date="2018-06-29" version="2.3">
       <description>
         <p>
           New features:
@@ -265,40 +254,13 @@
         </ul>
       </description>
     </release>
-
-    <release version="2.2.1" date="2018-04-03"/>
-    <release version="2.2" date="2018-03-26"/>
-    <release version="2.1.0" date="2017-05-02"/>
+    <release date="2018-04-03" version="2.2.1"/>
+    <release date="2018-03-26" version="2.2"/>
+    <release date="2017-05-02" version="2.1.0"/>
   </releases>
-
-  <content_rating type="oars-1.1">
-    <content_attribute id="violence-cartoon">none</content_attribute>
-    <content_attribute id="violence-fantasy">none</content_attribute>
-    <content_attribute id="violence-realistic">none</content_attribute>
-    <content_attribute id="violence-bloodshed">none</content_attribute>
-    <content_attribute id="violence-sexual">none</content_attribute>
-    <content_attribute id="violence-desecration">none</content_attribute>
-    <content_attribute id="violence-slavery">none</content_attribute>
-    <content_attribute id="violence-worship">none</content_attribute>
-    <content_attribute id="drugs-alcohol">none</content_attribute>
-    <content_attribute id="drugs-narcotics">none</content_attribute>
-    <content_attribute id="drugs-tobacco">none</content_attribute>
-    <content_attribute id="sex-nudity">none</content_attribute>
-    <content_attribute id="sex-themes">none</content_attribute>
-    <content_attribute id="sex-homosexuality">none</content_attribute>
-    <content_attribute id="sex-prostitution">none</content_attribute>
-    <content_attribute id="sex-adultery">none</content_attribute>
-    <content_attribute id="sex-appearance">none</content_attribute>
-    <content_attribute id="language-profanity">none</content_attribute>
-    <content_attribute id="language-humor">none</content_attribute>
-    <content_attribute id="language-discrimination">none</content_attribute>
-    <content_attribute id="social-chat">none</content_attribute>
-    <content_attribute id="social-info">none</content_attribute>
-    <content_attribute id="social-audio">none</content_attribute>
-    <content_attribute id="social-location">none</content_attribute>
-    <content_attribute id="social-contacts">none</content_attribute>
-    <content_attribute id="money-purchasing">none</content_attribute>
-    <content_attribute id="money-gambling">none</content_attribute>
-  </content_rating>
-
-</application>
+  <provides>
+    <id>mscore.desktop</id>
+  </provides>
+  <launchable type="desktop-id">mscore.desktop</launchable>
+  <update_contact>jurf_AT_riseup.net</update_contact>
+</component>
