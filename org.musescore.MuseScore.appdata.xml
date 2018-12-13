@@ -92,7 +92,7 @@
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
-    <release date="2018-07-31" version="2.3.2">
+    <release date="2018-12-07" version="3.0beta2">
       <description>
         <p>
           After the release of MuseScore 2.3.1 on July 6th 2018, we found a couple of regressions that we addressed in MuseScore 2.3.2, released on July 31st 2018. We also updated all languages to latest translations.
