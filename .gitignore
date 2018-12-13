@@ -2,3 +2,4 @@
 appdir/
 repo/
 *.flatpak
+build-dir
