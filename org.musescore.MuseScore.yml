@@ -1,4 +1,5 @@
 app-id:              org.musescore.MuseScore
+branch:              beta
 
 base:                io.qt.qtwebkit.BaseApp
 base-version:        '5.11'
@@ -21,7 +22,7 @@ finish-args:
   - --share=network
   # Note playback
   - --socket=pulseaudio
-  # PortAudio/MIDI  ????????????????
+  # Jack Audio ...
   - --device=all
   # Allow loading/saving files from anywhere
   # (portals don’t work yet)
@@ -44,6 +45,23 @@ cleanup-commands:
 modules:
   - shared-modules/lame/lame-3.99.5.json
 
+  - name: jack2
+    buildsystem: simple
+    build-commands:
+      - python3 waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --freebob=no --classic
+      - python3 waf build
+      - python3 waf install
+    cleanup:
+      - /bin
+      - /include
+      - /share
+      - /lib/jack
+      - /lib/libjackserver.so*
+      - /lib/pkgconfig
+    sources:
+      - type: archive
+        url: https://github.com/jackaudio/jack2/archive/v1.9.12.tar.gz
+        sha512: f0271dfc8f8e2f2489ca52f431ad4fa420665816d6c67a01a76da1d4b5ae91f6dad8c4e3309ec5e0c159c9d312ed56021ab323d74bce828ace26f1b8d477ddfa
 
   - name: musescore
     buildsystem: cmake
