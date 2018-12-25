@@ -1,15 +1,15 @@
-app-id:              org.musescore.MuseScore
+app-id: org.musescore.MuseScore
 
-base:                io.qt.qtwebkit.BaseApp
-base-version:        '5.11'
+base: io.qt.qtwebkit.BaseApp
+base-version: '5.11'
 
-runtime:             org.kde.Platform
-runtime-version:     '5.11'
-sdk:                 org.kde.Sdk
+runtime: org.kde.Platform
+runtime-version: '5.11'
+sdk: org.kde.Sdk
 
-command:             mscore
+command: mscore
 rename-desktop-file: mscore.desktop
-rename-icon:         mscore
+rename-icon: mscore
 
 finish-args:
   # X11 + XShm access
@@ -57,7 +57,6 @@ modules:
       - /include
       - '*.la'
 
-
   - name: portmidi
     buildsystem: cmake-ninja
     config-opts:
@@ -79,7 +78,6 @@ modules:
       - /include
       - '*.a'
       - '*.la'
-
 
   - name: musescore
     buildsystem: cmake
