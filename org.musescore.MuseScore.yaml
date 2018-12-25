@@ -1,15 +1,15 @@
-app-id:              org.musescore.MuseScore
+app-id: org.musescore.MuseScore
 
-base:                io.qt.qtwebkit.BaseApp
-base-version:        '5.11'
+base: io.qt.qtwebkit.BaseApp
+base-version: '5.11'
 
-runtime:             org.kde.Platform
-runtime-version:     '5.11'
-sdk:                 org.kde.Sdk
+runtime: org.kde.Platform
+runtime-version: '5.11'
+sdk: org.kde.Sdk
 
-command:             mscore
+command: mscore
 rename-desktop-file: mscore.desktop
-rename-icon:         mscore
+rename-icon: mscore
 
 finish-args:
   # X11 + XShm access
@@ -57,7 +57,6 @@ modules:
       - /include
       - '*.la'
 
-
   - name: portmidi
     buildsystem: cmake-ninja
     config-opts:
@@ -80,7 +79,6 @@ modules:
       - '*.a'
       - '*.la'
 
-
   - name: musescore
     buildsystem: cmake
     config-opts:
@@ -102,8 +100,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v2.3.2.tar.gz
-        sha256: 8d84a081ca03bdb0bbf706c2848064f27c3a6331033e313954133d44fb769aee
+        url: https://github.com/musescore/MuseScore/archive/v3.0.tar.gz
+        sha256: 678143411342bc7290364f7e7eeaba33ad9391b35cf3b6038861f0691a642d0e
       - type: patch
         path: musescore-mime-use-appid-icons.patch
       - type: file
