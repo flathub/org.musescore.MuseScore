@@ -92,6 +92,47 @@
   </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release date="2018-12-24" version="3.0">
+      <description>
+        <p>
+          MuseScore 3.0 is packed full of new features and improvements.
+        </p>
+        <p>
+          Musical notation:
+        </p>
+        <ul>
+          <li>Automatic placement - potential collisions between elements are detected and resolved automatically, allowing you to easily create great-looking scores with little need for manual adjustment</li>
+          <li>Improved parts facility - link parts to specific voices within a staff</li>
+          <li>System dividers - automatically generate dividers between systems</li>
+          <li>Staff type changes - change staff size, number of lines, and other properties mid-score</li>
+          <li>Temporary and cutaway staves - staves may appear and disappear as needed, including the ability to have empty measures be completely invisible</li>
+          <li>MuseJazz font - give all elements in your scores a handwritten appearance</li>
+          <li>Named noteheads - automatically display pitch names in noteheads using a variety of different naming schemes</li>
+        </ul>
+        <p>
+          Usability:
+        </p>
+        <ul>
+          <li>Tours - get online help automatically as you need it</li>
+          <li>Timeline - navigate using a graphical overview of the music structure of your score that shows rehearsal marks, changes of tempo, key, and time signature, etc.</li>
+          <li>Score comparison tool - easily view differences between versions of a score</li>
+          <li>Single page mode - vertically scrolling view of your score</li>
+          <li>Improved Inspector - control more element properties and set style defaults directly from the Inspector window, including new above/below placement settings</li>
+          <li>Palette search - enter a search term to quickly find any symbol</li>
+          <li>Timewise note input and editing - insert and deletes notes and rests within measures, automatically shifting subsequent music forwards or backwards</li>
+          <li>Next/previous element - Alt+Right/Left shortcuts to navigate through each element of your score</li>
+          <li>Auto-update - no longer necessary to download and install new versions from musescore.org</li>
+        </ul>
+        <p>
+          Playback:
+        </p>
+        <ul>
+          <li>Improved Mixer - mute individual voices, collapse channels into a single column, assign MIDI ports and channels</li>
+          <li>Improved Piano Roll Editor - easier control of the playback parameters of each note in your score</li>
+          <li>Redesigned Play Panel - docked within main window</li>
+        </ul>
+      </description>
+    </release>
     <release date="2018-07-31" version="2.3.2">
       <description>
         <p>
