@@ -89,7 +89,10 @@ modules:
       - make lrelease
     post-install:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
-      - install -Dm644 -t /app/share/appdata org.musescore.MuseScore.appdata.xml
+      - install -Dm644 -t /app/share/metainfo org.musescore.MuseScore.appdata.xml
+      # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
+      - mkdir /app/share/mscore -p
+      - ln -s /app/share/mscore-3.0/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
