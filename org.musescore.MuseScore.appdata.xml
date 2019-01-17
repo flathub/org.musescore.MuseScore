@@ -94,6 +94,35 @@
     <content_attribute id="money-purchasing">mild</content_attribute>
   </content_rating>
   <releases>
+    <release date="2019-01-15" version="3.0.1">
+      <description>
+        <p>
+          Improvements:
+        </p>
+        <ul>
+          <li>Redesign of New Score Wizard makes it easier to search templates, provides better score previews, and significantly improves accessibility for blind users</li>
+          <li>Reworked Mixer UI allows minimizing and making it dockable</li>
+          <li>Better automatic placement of hairpins and dynamics</li>
+          <li>Better import of 2.X scores</li>
+        </ul>
+        <p>
+          Fixes:
+        </p>
+        <ul>
+          <li>Properties were not saved properly in a number of cases</li>
+          <li>Layout was broken after operations with measure rests and tuplets</li>
+          <li>Time signatures appeared incorrectly in some cases and might lead to crash</li>
+          <li>Using the implode tool on notes connected with slurs led to crashes</li>
+          <li>Editing a barline was applied incorrectly</li>
+          <li>Context menu on instrument names didn't appear</li>
+          <li>Pages with landscape orientation were cropped when printing</li>
+          <li>Playback went crazy on saving</li>
+          <li>Tempo was applied incorrectly in certain cases involving fermatas</li>
+          <li>Slurs were lost or detached in some cases</li>
+          <li>Autoplacement couldn't be switched off for stems and arpeggio</li>
+        </ul>
+      </description>
+    </release>
     <release date="2018-12-24" version="3.0">
       <description>
         <p>

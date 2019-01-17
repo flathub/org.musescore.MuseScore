@@ -103,8 +103,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.0.tar.gz
-        sha256: 678143411342bc7290364f7e7eeaba33ad9391b35cf3b6038861f0691a642d0e
+        url: https://download.musescore.com/releases/MuseScore-3.0.1/MuseScore-3.0.1.zip
+        sha256: 593141376261b932f8618e2277089e511cc930d4ece620e28743fefb8dae8b82
       - type: patch
         path: musescore-mime-use-appid-icons.patch
       - type: file
