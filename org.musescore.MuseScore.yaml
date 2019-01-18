@@ -105,7 +105,7 @@ modules:
       - type: archive
         url: https://github.com/musescore/MuseScore/archive/v3.0.1.tar.gz
         sha256: 02fe4a8dce3eaaa0089866a395e43009d518594b55f4915767df637f294a82d0
-      - type: script
+      - type: shell
         commands:
           # https://github.com/musescore/MuseScore/releases/tag/v3.0.1
           - echo '06a66a2' > mscore/revision.h
