@@ -107,6 +107,7 @@ modules:
         sha256: 4e8a203f256b48d8be7937b70f0f36a87104ee8359c99d0456627a14a42e2d6b
       - type: shell
         commands:
+          - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
           # https://github.com/musescore/MuseScore/releases/tag/v3.0.2
           - echo '8ca4d2c' > mscore/revision.h
       - type: patch
