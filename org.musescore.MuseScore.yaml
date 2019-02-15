@@ -101,14 +101,19 @@ modules:
             mv "$f" "${d}org.musescore.MuseScore.$(basename $f)";
           done;
         done
+      # The scalable icon should be 128×128px (rsvg uses pt)
+      - cd /app/share/icons/hicolor/scalable/apps/;
+        rsvg-convert mscore.svg -w 96 -h 96 -f svg -o org.musescore.MuseScore.svg;
+        rm mscore.svg
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.0.1.tar.gz
-        sha256: 02fe4a8dce3eaaa0089866a395e43009d518594b55f4915767df637f294a82d0
+        url: https://github.com/musescore/MuseScore/archive/v3.0.2.tar.gz
+        sha256: 4e8a203f256b48d8be7937b70f0f36a87104ee8359c99d0456627a14a42e2d6b
       - type: shell
         commands:
-          # https://github.com/musescore/MuseScore/releases/tag/v3.0.1
-          - echo '06a66a2' > mscore/revision.h
+          - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
+          # https://github.com/musescore/MuseScore/releases/tag/v3.0.2
+          - echo '8ca4d2c' > mscore/revision.h
       - type: patch
         path: musescore-mime-use-appid-icons.patch
       - type: file
