@@ -81,6 +81,9 @@ modules:
     post-install:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
       - install -Dm644 -t /app/share/metainfo org.musescore.MuseScore.appdata.xml
+      # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
+      - mkdir /app/share/mscore -p
+      - ln -s /app/share/mscore-3.0/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -89,10 +92,19 @@ modules:
             mv "$f" "${d}org.musescore.MuseScore.$(basename $f)";
           done;
         done
+      # The scalable icon should be 128×128px (rsvg uses pt)
+      - cd /app/share/icons/hicolor/scalable/apps/;
+        rsvg-convert mscore.svg -w 96 -h 96 -f svg -o org.musescore.MuseScore.svg;
+        rm mscore.svg
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.0.tar.gz
-        sha256: 678143411342bc7290364f7e7eeaba33ad9391b35cf3b6038861f0691a642d0e
+        url: https://github.com/musescore/MuseScore/archive/v3.0.2.tar.gz
+        sha256: 4e8a203f256b48d8be7937b70f0f36a87104ee8359c99d0456627a14a42e2d6b
+      - type: shell
+        commands:
+          - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
+          # https://github.com/musescore/MuseScore/releases/tag/v3.0.2
+          - echo '8ca4d2c' > mscore/revision.h
       - type: patch
         path: musescore-mime-use-appid-icons.patch
       - type: file
