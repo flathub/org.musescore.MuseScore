@@ -82,6 +82,11 @@
     <content_attribute id="money-purchasing">mild</content_attribute>
   </content_rating>
   <releases>
+    <release date="2019-02-28" version="3.0.4">
+      <description>
+        <p>MuseScore 3.0.3 introduced some great improvements as well as unfortunate regressions which were addressed in the MuseScore 3.0.4 release.</p>
+      </description>
+    </release>
     <release date="2019-02-26" version="3.0.3">
       <description>
         <p>The main changes in this release are the performance improvements, the fixes for massively requested functionality like parts playback and the new crash report facility.</p>

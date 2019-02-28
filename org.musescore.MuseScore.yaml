@@ -107,13 +107,13 @@ modules:
         rm mscore.svg
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.0.3.tar.gz
-        sha256: 014902b1972984da83d0b66bedcc457c36734ad9c4a26f6d2b035419a85061f4
+        url: https://github.com/musescore/MuseScore/archive/v3.0.4.tar.gz
+        sha256: 5adbe08854842e01279293bf96a7710542defe8afd2f5e3ecea42e5d99881bb6
       - type: shell
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
           # https://github.com/musescore/MuseScore/releases/tag/v3.0.3
-          - echo '5a0be2a' > mscore/revision.h
+          - echo 'cda4080' > mscore/revision.h
       - type: patch
         path: musescore-mime-use-appid-icons.patch
       - type: file
