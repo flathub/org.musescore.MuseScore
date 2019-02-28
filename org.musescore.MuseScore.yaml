@@ -85,6 +85,12 @@ modules:
       - -DCMAKE_BUILD_TYPE=RELEASE
       - -DBUILD_ALSA=OFF
       - -DBUILD_JACK=OFF
+    build-options:
+      arch:
+        aarch64:
+          config-opts:
+            # Crash reporter not ported to ARM64 yet
+            - -DBUILD_CRASH_REPORTER=OFF
     build-commands:
       - make lrelease
     post-install:
