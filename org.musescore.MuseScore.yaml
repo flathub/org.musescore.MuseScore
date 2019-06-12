@@ -1,10 +1,10 @@
 app-id: org.musescore.MuseScore
 
 base: io.qt.qtwebkit.BaseApp
-base-version: '5.11'
+base-version: '5.12'
 
 runtime: org.kde.Platform
-runtime-version: '5.11'
+runtime-version: '5.12'
 sdk: org.kde.Sdk
 
 command: mscore
@@ -29,21 +29,12 @@ finish-args:
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
 
-# From https://gitlab.com/freedesktop-sdk/freedesktop-sdk/blob/18.08/project.conf#L51
-# Can be removed after switching to the 5.12 SDK
-build-options:
-  cflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
-  cxxflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
-  ldflags: -Wl,--as-needed,-z,relro,-z,now
-
 cleanup-commands:
   # Cleanup after QtWebKit
   - rm -rf /app/include
   - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
 
 modules:
-  - shared-modules/lame/lame-3.99.5.json
-
   - name: portaudio
     config-opts:
       - --disable-static
