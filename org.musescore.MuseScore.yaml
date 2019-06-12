@@ -1,3 +1,4 @@
+---
 app-id: org.musescore.MuseScore
 
 base: io.qt.qtwebkit.BaseApp
