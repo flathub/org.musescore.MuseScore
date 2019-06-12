@@ -112,7 +112,7 @@ modules:
       - type: shell
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
-          # https://github.com/musescore/MuseScore/releases/tag/v3.0.3
+          # https://github.com/musescore/MuseScore/releases/
           - echo 'e26f7c4' > mscore/revision.h
       - type: patch
         path: musescore-mime-use-appid-icons.patch
