@@ -98,10 +98,6 @@ modules:
             mv "$f" "${d}org.musescore.MuseScore.$(basename $f)";
           done;
         done
-      # The scalable icon should be 128×128px (rsvg uses pt)
-      - cd /app/share/icons/hicolor/scalable/apps/;
-        rsvg-convert mscore.svg -w 96 -h 96 -f svg -o org.musescore.MuseScore.svg;
-        rm mscore.svg
     sources:
       - type: archive
         url: https://github.com/musescore/MuseScore/archive/v3.1.tar.gz
