@@ -1,0 +1,7 @@
+{
+    "skip-appstream-check": true,
+    "skip-arches": [
+        "arm",
+        "i386"
+    ]
+}
