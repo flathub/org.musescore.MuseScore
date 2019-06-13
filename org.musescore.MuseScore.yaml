@@ -63,7 +63,7 @@ modules:
         url: https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip
         sha256: 08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f
       - type: patch
-        path: portmidi-no-java.patch
+        path: patches/portmidi-no-java.patch
     cleanup:
       - /bin
       - /lib/pkgconfig
@@ -112,4 +112,4 @@ modules:
           # https://github.com/musescore/MuseScore/releases/
           - echo 'e26f7c4' > mscore/revision.h
       - type: patch
-        path: musescore-mime-use-appid-icons.patch
+        path: patches/musescore-mime-use-appid-icons.patch
