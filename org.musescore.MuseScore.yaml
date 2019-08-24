@@ -16,8 +16,9 @@ finish-args:
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
-  # Wayland
+  # Enable Wayland but keep X11 default for now
   - --socket=wayland
+  - --env=QT_QPA_PLATFORM=xcb
   # MuseScore.com connectivity
   - --share=network
   # Note playback
