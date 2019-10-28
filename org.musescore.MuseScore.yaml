@@ -2,10 +2,10 @@
 app-id: org.musescore.MuseScore
 
 base: io.qt.qtwebkit.BaseApp
-base-version: '5.12'
+base-version: '5.13'
 
 runtime: org.kde.Platform
-runtime-version: '5.12'
+runtime-version: '5.13'
 sdk: org.kde.Sdk
 
 command: mscore
