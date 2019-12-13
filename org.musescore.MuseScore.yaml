@@ -114,3 +114,5 @@ modules:
           - echo '492d7ef' > mscore/revision.h
       - type: patch
         path: patches/musescore-mime-use-appid-icons.patch
+      - type: patch
+        path: patches/musescore-appdata.diff
