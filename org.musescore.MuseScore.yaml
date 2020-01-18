@@ -30,6 +30,8 @@ finish-args:
   - --filesystem=host
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
+  # MuseScore want access to the session manager
+  - --talk-name=org.gnome.SessionManager
 
 cleanup-commands:
   # Cleanup after QtWebKit
@@ -101,8 +103,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.4beta.tar.gz
-        sha256: 6aa122cf5661f064fa2046e67045ee857f45dcb657f851cccf3c8cf103d73eab
+        url: https://github.com/musescore/MuseScore/archive/v3.4rc.tar.gz
+        sha256: 679b34f2f8e5c2879f14bf63346f903919cc07d93535ef806ac6e3ac3d161ba4
       - type: archive
         url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
         sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
@@ -111,7 +113,7 @@ modules:
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
           # https://github.com/musescore/MuseScore/releases/
-          - echo '684f74e' > mscore/revision.h
+          - echo '716655c' > mscore/revision.h
       - type: patch
         path: patches/musescore-mime-use-appid-icons.patch
       - type: patch
