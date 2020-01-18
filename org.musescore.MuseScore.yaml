@@ -28,10 +28,9 @@ finish-args:
   # Allow loading/saving files from anywhere
   # (portals don’t work yet)
   - --filesystem=host
-  # Allow other instances to see lockfiles
-  - --env=TMPDIR=/var/tmp
   # MuseScore want access to the session manager
   - --talk-name=org.gnome.SessionManager
+  - --talk-name=org.a11y.Bus
 
 cleanup-commands:
   # Cleanup after QtWebKit
