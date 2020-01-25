@@ -78,6 +78,7 @@ modules:
       - -DCMAKE_BUILD_TYPE=RELEASE
       - -DBUILD_ALSA=OFF
       - -DBUILD_JACK=OFF
+      - -DBUILD_TELEMETRY_MODULE=OFF
     build-options:
       arch:
         aarch64:
