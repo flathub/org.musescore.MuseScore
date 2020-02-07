@@ -78,6 +78,7 @@ modules:
       - -DCMAKE_BUILD_TYPE=RELEASE
       - -DBUILD_ALSA=OFF
       - -DBUILD_JACK=OFF
+      - -DBUILD_TELEMETRY_MODULE=OFF
     build-options:
       arch:
         aarch64:
@@ -90,7 +91,7 @@ modules:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-3.0/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-3.4/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -101,8 +102,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.3.4.tar.gz
-        sha256: ab8bade6c7eec6a9ae03f435cad65e79c4ca031d19020aa6e2a4da2868f49a2a
+        url: https://github.com/musescore/MuseScore/archive/v3.4.2.tar.gz
+        sha256: 2604aa9db0b9e8ac3b067aeb98effce07f29e8ea510729d7a76f66e0c4e3f95d
       - type: archive
         url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
         sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
@@ -111,7 +112,7 @@ modules:
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
           # https://github.com/musescore/MuseScore/releases/
-          - echo '7684abe' > mscore/revision.h
+          - echo '148e43f' > mscore/revision.h
       - type: patch
         path: patches/musescore-mime-use-appid-icons.patch
       - type: patch
