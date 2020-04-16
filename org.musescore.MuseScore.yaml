@@ -30,6 +30,8 @@ finish-args:
   - --filesystem=host
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
+  # JACK
+  - --device=shm
 
 cleanup-commands:
   # Cleanup after QtWebKit
@@ -37,6 +39,23 @@ cleanup-commands:
   - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
 
 modules:
+
+  - name: jack2
+    buildsystem: simple
+    build-commands:
+      - ./waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --classic
+      - ./waf build -j $FLATPAK_BUILDER_N_JOBS
+      - ./waf install
+    cleanup:
+      - /bin
+      - /share
+      - /lib/jack
+      - /lib/libjackserver.so*
+    sources:
+      - type: archive
+        url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
+        sha256: a20a32366780c0061fd58fbb5f09e514ea9b7ce6e53b080a44b11a558a83217c
+
   - name: portaudio
     config-opts:
       - --disable-static
@@ -77,7 +96,7 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RELEASE
       - -DBUILD_ALSA=OFF
-      - -DBUILD_JACK=OFF
+      - -DBUILD_JACK=ON
       - -DBUILD_TELEMETRY_MODULE=OFF
     build-options:
       arch:
