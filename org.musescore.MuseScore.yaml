@@ -1,10 +1,11 @@
+---
 app-id: org.musescore.MuseScore
 
 base: io.qt.qtwebkit.BaseApp
-base-version: '5.11'
+base-version: '5.12'
 
 runtime: org.kde.Platform
-runtime-version: '5.11'
+runtime-version: '5.12'
 sdk: org.kde.Sdk
 
 command: mscore
@@ -15,8 +16,9 @@ finish-args:
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
-  # Wayland
+  # Enable Wayland but keep X11 default for now
   - --socket=wayland
+  - --env=QT_QPA_PLATFORM=xcb
   # MuseScore.com connectivity
   - --share=network
   # Note playback
@@ -28,13 +30,8 @@ finish-args:
   - --filesystem=host
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
-
-# From https://gitlab.com/freedesktop-sdk/freedesktop-sdk/blob/18.08/project.conf#L51
-# Can be removed after switching to the 5.12 SDK
-build-options:
-  cflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
-  cxxflags: -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches
-  ldflags: -Wl,--as-needed,-z,relro,-z,now
+  # JACK
+  - --device=shm
 
 cleanup-commands:
   # Cleanup after QtWebKit
@@ -42,7 +39,22 @@ cleanup-commands:
   - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
 
 modules:
-  - shared-modules/lame/lame-3.99.5.json
+
+  - name: jack2
+    buildsystem: simple
+    build-commands:
+      - ./waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --classic
+      - ./waf build -j $FLATPAK_BUILDER_N_JOBS
+      - ./waf install
+    cleanup:
+      - /bin
+      - /share
+      - /lib/jack
+      - /lib/libjackserver.so*
+    sources:
+      - type: archive
+        url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
+        sha256: a20a32366780c0061fd58fbb5f09e514ea9b7ce6e53b080a44b11a558a83217c
 
   - name: portaudio
     config-opts:
@@ -71,7 +83,7 @@ modules:
         url: https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip
         sha256: 08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f
       - type: patch
-        path: portmidi-no-java.patch
+        path: patches/portmidi-no-java.patch
     cleanup:
       - /bin
       - /lib/pkgconfig
@@ -84,7 +96,8 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RELEASE
       - -DBUILD_ALSA=OFF
-      - -DBUILD_JACK=OFF
+      - -DBUILD_JACK=ON
+      - -DBUILD_TELEMETRY_MODULE=OFF
     build-options:
       arch:
         aarch64:
@@ -97,7 +110,7 @@ modules:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-3.1/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-3.4/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -106,14 +119,10 @@ modules:
             mv "$f" "${d}org.musescore.MuseScore.$(basename $f)";
           done;
         done
-      # The scalable icon should be 128×128px (rsvg uses pt)
-      - cd /app/share/icons/hicolor/scalable/apps/;
-        rsvg-convert mscore.svg -w 96 -h 96 -f svg -o org.musescore.MuseScore.svg;
-        rm mscore.svg
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.1beta2.tar.gz
-        sha256: c65ce0b42d9cd3c63058506121de5917c82d840e4de194781c8e9652cb61d6f8
+        url: https://github.com/musescore/MuseScore/archive/v3.4.2.tar.gz
+        sha256: 2604aa9db0b9e8ac3b067aeb98effce07f29e8ea510729d7a76f66e0c4e3f95d
       - type: archive
         url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
         sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
@@ -121,7 +130,9 @@ modules:
       - type: shell
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
-          # https://github.com/musescore/MuseScore/releases/tag/v3.0.3
-          - echo '1982daf' > mscore/revision.h
+          # https://github.com/musescore/MuseScore/releases/
+          - echo '148e43f' > mscore/revision.h
       - type: patch
-        path: musescore-mime-use-appid-icons.patch
+        path: patches/musescore-mime-use-appid-icons.patch
+      - type: patch
+        path: patches/musescore-appdata.diff
