@@ -1,0 +1,40 @@
+diff --git a/build/Linux+BSD/musescore.xml.in b/build/Linux+BSD/musescore.xml.in
+index ed2abaed4..a01580f21 100644
+--- a/build/Linux+BSD/musescore.xml.in
++++ b/build/Linux+BSD/musescore.xml.in
+@@ -7,7 +7,7 @@
+         <comment>MuseScore compressed score</comment>
+         <glob pattern="*.mscz"/>
+         <sub-class-of type="application/zip"/>
+-        <icon name="application-x-musescore@MSCORE_INSTALL_SUFFIX@"/>
++        <icon name="org.musescore.MuseScore.application-x-musescore@MSCORE_INSTALL_SUFFIX@"/>
+     </mime-type>
+ 
+     <mime-type type="application/x-musescore+xml">
+@@ -15,7 +15,7 @@
+         <glob pattern="*.mscx"/>
+         <sub-class-of type="application/xml"/>
+         <root-XML namespaceURI="" localName="museScore"/>
+-        <icon name="application-x-musescore@MSCORE_INSTALL_SUFFIX@+xml"/>
++        <icon name="org.musescore.MuseScore.application-x-musescore@MSCORE_INSTALL_SUFFIX@+xml"/>
+         <magic>
+             <match type="string" value="&lt;?xml" offset="0">
+                 <match type="string" value="&lt;museScore" offset="0:128">
+@@ -68,7 +68,7 @@
+         <comment>MusicXML compressed score</comment>
+         <glob pattern="*.mxl"/>
+         <sub-class-of type="application/zip"/>
+-        <icon name="application-vnd.recordare.musicxml@MSCORE_INSTALL_SUFFIX@"/>
++        <icon name="org.musescore.MuseScore.application-vnd.recordare.musicxml@MSCORE_INSTALL_SUFFIX@"/>
+     </mime-type>
+ 
+     <mime-type type="application/vnd.recordare.musicxml+xml">
+@@ -79,7 +79,7 @@
+         <sub-class-of type="application/xml"/>
+         <root-XML namespaceURI="" localName="score-partwise"/>
+         <root-XML namespaceURI="" localName="score-timewise"/>
+-        <icon name="application-vnd.recordare.musicxml@MSCORE_INSTALL_SUFFIX@+xml"/>
++        <icon name="org.musescore.MuseScore.application-vnd.recordare.musicxml@MSCORE_INSTALL_SUFFIX@+xml"/>
+         <magic>
+             <match type="string" value="&lt;?xml" offset="0">
+                 <match type="string" value="score-partwise" offset="0:128"/>
