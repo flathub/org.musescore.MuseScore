@@ -11,6 +11,8 @@ sdk: org.kde.Sdk
 command: mscore
 rename-desktop-file: mscore.desktop
 rename-icon: mscore
+desktop-file-name-prefix: "(beta) "
+branch: beta
 
 finish-args:
   # X11 + XShm access
