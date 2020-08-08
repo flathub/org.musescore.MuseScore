@@ -1,11 +1,92 @@
 diff --git a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in b/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
-index d52ce502f..0e0a7eeee 100644
+index d52ce502f..d9237744d 100644
 --- a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
 +++ b/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
-@@ -82,6 +82,69 @@
+@@ -82,6 +82,150 @@
      <content_attribute id="money-purchasing">mild</content_attribute>
    </content_rating>
    <releases>
++    <release date="2020-08-05" version="3.5.0">
++      <url>https://musescore.org/en/node/308610</url>
++      <description>
++      <p>New features</p>
++      <ul>
++      <li>Option available in Preferences for playback of chord symbols</li>
++      <li>Mid-staff instrument changes now do almost everything automatically (see [below](#instrument-changes))</li>
++      <li>Support for Orca (Linux) screenreader</li>
++      <li>Hairpins, voltas, and other lines now adapt anchor points when dragged</li>
++      <li>Much more functional piano roll editor (see [below](#pre))</li>
++      <li>Splash screen displays progress messages while loading MuseScore</li>
++      <li>Diatonic pitch up/down (keep degree alterations) shortcuts</li>
++      <li>Select Similar Elements: Same Beat</li>
++      <li>#293113: New Score Wizard automatically numbers instruments</li>
++      <li>#18897: Property for beam style of tremolo (all strokes attached to stem)</li>
++      <li>#296075: Style for hiding brackets which span to a single staff when empty staves are hidden</li>
++      <li>#203026: Properties and styles for measure number positioning, including centered and below staff</li>
++      <li>#65241: Property and style for position of multimeasure rest numbers</li>
++      <li>#299644: Property for fretboard diagram rotation</li>
++      </ul>
++
++       <p>Improvements</p>
++       <ul>
++       <li>#16077: Double-click a header, footer, or instrument name to access the dialog for editing it</li>
++       <li>#27371: Score tabs can now be closed using mouse middle button</li>
++       <li>Improved layout of two-note and single-note tremolos, with and without stem</li>
++       <li>#93376: Smooth scrolling during playback in Continuous view</li>
++       <li>Various improvements to simplify searching and loading backup files</li>
++       <li>#303617: Metric modulation for dotted eighth to quarter</li>
++       <li>Automatic collision avoidance between rests and notes/rests in other voices</li>
++       <li>Staff property to automatically merge rests between voices</li>
++       <li>Allow selection of multiple similar items with shift+click</li>
++       <li>Allow &quot;repeating a note&quot; by clicking a notehead then pressing &quot;R&quot; in normal mode</li>
++       <li>Changes made in Preferences are applied significantly faster</li>
++       <li>Style options to align chord symbols within systems</li>
++       <li>More zoom controls</li>
++       <li>Additional plugin capabilities</li>
++       <li>Altered keyboard and mouse zoom precision and consistency</li>
++       <li>Improved performance of applying preferences</li>
++       <li>Chords playback is on by default (untick the "play" property to disable it)</li>
++       <li>Adding notes to a tuplet now adds them with respect to the tuplet's space</li>
++       <li>MuseScore 3 is now available as a Windows PortableApp</li>
++       <li>Altered Shift+L/R for leading space while in edit mode upon notehead</li>
++       <li>All symbols are now available for the plugins</li>
++       </ul>
++
++       <p>Fixes</p>
++       <ul>
++       <li>JACK audio/MIDI worked incorrectly on some platforms</li>
++       <li>#148311: Loop playback skipped final rests in the last measure</li>
++       <li>MIDI note-off events were not sent in some cases</li>
++       <li>Undoing slur addition to a range only removed one slur</li>
++       <li>Canceling a selection worked incorrectly in some cases </li>
++       <li>macOS package was not notarized in Apple</li>
++       <li>Various fixes for the text editing process</li>
++       <li>Fixed an issue when hiding notes or rests in a voice > 1 causes stems/beams to flip in a bad and unexpected way</li>
++       <li>Fixed an issue when two grace notes disabling vertical chord alignment (Maximum Shift Above)</li>
++       <li>Fixed an issue when "maximum shift above" leading to layout weirdness if measure has rhythm slashes and rests</li>
++       <li>Fixed an issue with inactive "Realize chord symbols" command</li>
++       <li>Fixed an issue when key signature appears in multiple places on the single staff</li>
++       <li>Fixed an issue with missing grid of measures in the "timeline" view</li>
++       <li>Fixed an issue with appearing of empty dialog during the "Save Online"</li>
++       <li>Fixed an crash during the drag &amp; drop of volta in continuous view</li>
++       <li>Brackets were displaced in Continuous View</li>
++       <li>Nested tuplets in linked staves led to corruption</li>
++       <li>Octave selection was inconsistent in note input mode</li>
++       <li>Voices worked incorrectly in the parts dialog in some cases</li>
++       <li>Misclicking when attempting to create a range selection caused the current selection to be lost</li>
++       <li>On-screen rendering of synthetically emboldened fonts was broken in some cases</li>
++       <li>Smooth scrolling worked wrong in Continuous view when dealing with repeats</li>
++       <li>Saving Online a yet unsaved or uncompressed (mscx) file didn't work</li>
++       <li>Fixed zoom-box 100% selection bug</li>
++       <li>Fixed a bug with ignoring of blank lines at top of text elements</li>
++       <li>Fixed an issue when cut/paste, drag/drop in Piano Roll Editor does not preserve NoteEvent values</li>
++       <li>Fixed a playback of chord symbols attached to fret diagrams</li>
++       <li>Fixed a note entry suggested position with no selection and last selected note in voice > 1</li>
++       <li>Fixed a display of the bold and underlined texts</li>
++       <li>Fixed the "Save Online" on AppImages</li>
++       </ul>
++      </description>
++    </release>
 +    <release date="2020-02-07" version="3.4.2">
 +      <url>https://musescore.org/en/3.4.2</url>
 +      <description>
