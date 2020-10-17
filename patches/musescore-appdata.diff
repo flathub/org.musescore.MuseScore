@@ -2,10 +2,22 @@ diff --git a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in b/build/Linu
 index d52ce502f..d9237744d 100644
 --- a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
 +++ b/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
-@@ -82,6 +82,212 @@
+@@ -82,6 +82,224 @@
      <content_attribute id="money-purchasing">mild</content_attribute>
    </content_rating>
    <releases>
++    <release date="2020-10-16" version="3.5.2">
++      <url>https://github.com/musescore/MuseScore/releases/tag/v3.5.2</url>
++      <description>
++        <p>Fixes</p>
++        <ul>
++          <li>Fixed an unexpected page stretching in "Edit style" dialog</li>
++          <li>Fixed an issue with audio export on Windows, previously exporting to .FLAC or .OGG could result in an empty file that cannot be played</li>
++          <li>Fixed an issue of harmony playback preferences. Previously, the real value of "Chord symbol playback" was not taken into account until the first toggle of this setting</li>
++          <li>Fixed a potential crash that could occur when resizing the Piano Roll</li>
++        </ul>
++      </description>
++    </release>
 +    <release date="2020-10-06" version="3.5.1">
 +      <url>https://github.com/musescore/MuseScore/releases/tag/v3.5.1</url>
 +      <description>
