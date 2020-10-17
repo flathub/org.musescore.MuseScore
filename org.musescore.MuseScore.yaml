@@ -98,6 +98,7 @@ modules:
       - -DBUILD_ALSA=OFF
       - -DBUILD_JACK=ON
       - -DBUILD_TELEMETRY_MODULE=OFF
+      - -DMUSESCORE_BUILD_CONFIG=release
     build-options:
       arch:
         aarch64:
@@ -121,8 +122,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.5.1.tar.gz
-        sha256: 2360a428e16d330a525966913f66a3e9dbe5db146aeb2d5eb8f017ce2293afa8
+        url: https://github.com/musescore/MuseScore/archive/v3.5.2.tar.gz
+        sha256: d863945d841aaad5889a77c7151159b6bba8bd7dc34fdd1a77400021ffc564da
       - type: archive
         url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
         sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
@@ -131,7 +132,7 @@ modules:
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
           # https://github.com/musescore/MuseScore/releases/
-          - echo 'daa5fb7' > mscore/revision.h
+          - echo 'bb09de0' > mscore/revision.h
       - type: patch
         path: patches/musescore-mime-use-appid-icons.patch
       - type: patch
