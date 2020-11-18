@@ -11,6 +11,8 @@ sdk: org.kde.Sdk
 command: mscore
 rename-desktop-file: mscore.desktop
 rename-icon: mscore
+desktop-file-name-prefix: "(beta) "
+branch: beta
 
 finish-args:
   # X11 + XShm access
@@ -111,7 +113,7 @@ modules:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-3.5/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-3.6/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -122,8 +124,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.5.2.tar.gz
-        sha256: d863945d841aaad5889a77c7151159b6bba8bd7dc34fdd1a77400021ffc564da
+        url: https://github.com/musescore/MuseScore/archive/v3.6alpha.tar.gz
+        sha256: be9f0c1dad5405a7eef50c67eec337a8ec35e6122e557c1b861661f160d47374
       - type: archive
         url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
         sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
@@ -132,7 +134,7 @@ modules:
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
           # https://github.com/musescore/MuseScore/releases/
-          - echo 'bb09de0' > mscore/revision.h
+          - echo 'fc8fa91' > mscore/revision.h
       - type: patch
         path: patches/musescore-mime-use-appid-icons.patch
       - type: patch
