@@ -2,28 +2,165 @@ diff --git a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in b/build/Linu
 index d52ce502f..d9237744d 100644
 --- a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
 +++ b/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
-@@ -82,6 +82,89 @@
+@@ -82,6 +82,226 @@
      <content_attribute id="money-purchasing">mild</content_attribute>
    </content_rating>
    <releases>
-+    <release date="2020-07-16" version="3.5.0rc">
-+      <url>https://musescore.org/en/node/307703</url>
++    <release date="2020-11-16" version="3.6alpha">
 +    </release>
-+    <release date="2020-06-10" version="3.5.0Beta">
-+      <url>https://musescore.org/en/node/306547</url>
-+    </release>
-+    <release date="2020-05-06" version="3.5.0-alpha2">
-+      <url>https://musescore.org/en/node/303876</url>
-+    </release>
-+    <release date="2020-05-04" version="3.5.0-alpha">
-+      <url>https://musescore.org/en/handbook/developers-handbook/release-notes/release-notes-musescore-3x/release-notes-musescore-35x-0</url>
++    <release date="2020-10-16" version="3.5.2">
++      <url>https://github.com/musescore/MuseScore/releases/tag/v3.5.2</url>
 +      <description>
-+        <p>New features:</p>
++        <p>Fixes</p>
 +        <ul>
-+          <li>Playback of Chord Symbols</li>
-+          <li>Support for Orca (Linux) screenreader</li>
-+          <li>Fretboard diagrams can now be rotated</li>
++          <li>Fixed an unexpected page stretching in "Edit style" dialog</li>
++          <li>Fixed an issue with audio export on Windows, previously exporting to .FLAC or .OGG could result in an empty file that cannot be played</li>
++          <li>Fixed an issue of harmony playback preferences. Previously, the real value of "Chord symbol playback" was not taken into account until the first toggle of this setting</li>
++          <li>Fixed a potential crash that could occur when resizing the Piano Roll</li>
 +        </ul>
++      </description>
++    </release>
++    <release date="2020-10-06" version="3.5.1">
++      <url>https://github.com/musescore/MuseScore/releases/tag/v3.5.1</url>
++      <description>
++       <p>Fixes</p>
++       <ul>
++       <li>Fixed a crash during the changing voice of chord with tied grace note</li>
++       <li>Fixed a wrong curly bracket scaling when using MuseJazz</li>
++       <li>Fixed a scaling of tuplet number</li>
++       <li>Fixed an issue when Staff/Part dialog changes not dirty when activated via double click</li>
++       <li>Fixed an issue when divider was not removed after undo of deleting a vertical frame</li>
++       <li>Fixed an issue when triple and quadruple dots was not exported correctly</li>
++       <li>Fixed an issue when tremolo customizations lost on second save/reload</li>
++       <li>Fixed the various issues with handling the title frame on MusicXML import</li>
++       <li>Fixed an issue when decrescendo doesn't work on tied notes with subchannels</li>
++       <li>Fixed an issue when changing portaudio preferences does not work</li>
++       <li>Fixed an issue with loudness of accents</li>
++       <li>Fixed an issue when changing portaudio preferences does not work</li>
++       <li>Chord symbol playback settings are now available in Edit Style dialog </li>
++       <li>Fixed an issue when changes to Measure properties are not propagated between score and parts </li>
++       <li>Fixed an issue when Ctrl+Delete command was not alowed from note input mode </li>
++       <li>Added preferences to disable chord symbol playback when opening old scores, or creating new ones </li>
++       <li>Fixed an issue with entering notes above/below staff</li>
++       <li>Fixed an issue with assertion failure adding image to vertical frame</li>
++       <li>Fixed issues with voice and chords with drum input</li>
++       <li>Fixed the crashes with using the hbox within vbox</li>
++       <li>Fixed a crash when deleting all measures</li>
++       <li>Added the guitar "Solo" templates with default guitar sound</li>
++       <li>Fix invisible elements not getting displayed after turning "Show invisible" on</li>
++       <li>Fixed an issue when 1-line staves show unexpected vertical offset</li>
++       <li>Fixed an issue with bad selection and corruption on delete</li>
++       <li>Fixed an issue with changing Common time to Cut time in parts shuts down the program</li>
++       <li>Fixed a crash on playback of score with MM rest at the end</li>
++       <li>Updated extra navigation shortcuts to handle MMRests appropriately</li>
++       <li>Updated offsets of Gonville's top &amp; bottom bracket glyphs</li>
++       <li>"add clef" shortcuts are now allowed to also work in normal mode</li>
++       <li>Fixed an issue when clicking footer text corrupts parts</li>
++       <li>Fixed an issue when continuous view stops repeats from working in playback</li>
++       <li>Fixed an issue when drag and drop a breath &amp; pause or rest symbol from the score to a custom palette crashes the program</li>
++       <li>Fixed a crash on flipping beam across system break</li>
++       <li>Fixed an issue when status bar does not show concert pitch of octave transposing instruments</li>
++       <li>Fixed an issue when ambitus not correctly calculated for (octave) transposing instruments</li>
++       <li>Fixed the crashes when pasting fret diagram without chord symbol in score with parts</li>
++       <li>Fixed an issue when instrument change data not properly saved in linked staves</li>
++       <li>Fixed an issue when pasting a measure with "above" breaths/pauses flips them to "below"</li>
++       <li>Now it possible to flip breaths/pauses using X</li>
++       <li>Fixed an issue when alpha (transparency) not showing on several symbols and Elements</li>
++       <li>Fixed an issue when Create Time Signature dialog doesn't need to add special text whenever the internal value of nominator or denominator is changed</li>
++       <li>Added a fractional Time Signatures Support</li>
++       <li>Fixed an issue when unintended loss of denominator in Time Signatures</li>
++       <li>Fixed an issue with export to WAV, OGG, FLAC files with the path name that contains non-ASCII characters</li>
++       <li>Fixed the crashes after update due to qmlcache </li>
++       <li>Adjusted a size of settings field for multimeasure rests</li>
++       <li>Fixed an issue when changing language settings changes to Basic workspace</li>
++       <li>Fixed an issue when file operations cause crash after changing translations in preferences</li>
++       <li>Fixed an issue when In triplet in last Half Note of 6/4, changing last Quarter Note in triplet to Eight causes corruption</li>
++       <li>Fixed an issue when Start center crashes MuseScore if there is no Internet connection</li>
++       <li>Fixed a crash on DPI change in preferences</li>
++       <li>Fixed an issue when inserting a new measure within a melisma causes a crash</li>
++       <li>Fixed an issue when pairs of acciaccaturas show two slashes instead of one</li>
++       </ul>
++      </description>
++    </release>
++    <release date="2020-08-05" version="3.5.0">
++      <url>https://musescore.org/en/node/308610</url>
++      <description>
++      <p>New features</p>
++      <ul>
++      <li>Option available in Preferences for playback of chord symbols</li>
++      <li>Mid-staff instrument changes now do almost everything automatically (see [below](#instrument-changes))</li>
++      <li>Support for Orca (Linux) screenreader</li>
++      <li>Hairpins, voltas, and other lines now adapt anchor points when dragged</li>
++      <li>Much more functional piano roll editor (see [below](#pre))</li>
++      <li>Splash screen displays progress messages while loading MuseScore</li>
++      <li>Diatonic pitch up/down (keep degree alterations) shortcuts</li>
++      <li>Select Similar Elements: Same Beat</li>
++      <li>#293113: New Score Wizard automatically numbers instruments</li>
++      <li>#18897: Property for beam style of tremolo (all strokes attached to stem)</li>
++      <li>#296075: Style for hiding brackets which span to a single staff when empty staves are hidden</li>
++      <li>#203026: Properties and styles for measure number positioning, including centered and below staff</li>
++      <li>#65241: Property and style for position of multimeasure rest numbers</li>
++      <li>#299644: Property for fretboard diagram rotation</li>
++      </ul>
++
++       <p>Improvements</p>
++       <ul>
++       <li>#16077: Double-click a header, footer, or instrument name to access the dialog for editing it</li>
++       <li>#27371: Score tabs can now be closed using mouse middle button</li>
++       <li>Improved layout of two-note and single-note tremolos, with and without stem</li>
++       <li>#93376: Smooth scrolling during playback in Continuous view</li>
++       <li>Various improvements to simplify searching and loading backup files</li>
++       <li>#303617: Metric modulation for dotted eighth to quarter</li>
++       <li>Automatic collision avoidance between rests and notes/rests in other voices</li>
++       <li>Staff property to automatically merge rests between voices</li>
++       <li>Allow selection of multiple similar items with shift+click</li>
++       <li>Allow &quot;repeating a note&quot; by clicking a notehead then pressing &quot;R&quot; in normal mode</li>
++       <li>Changes made in Preferences are applied significantly faster</li>
++       <li>Style options to align chord symbols within systems</li>
++       <li>More zoom controls</li>
++       <li>Additional plugin capabilities</li>
++       <li>Altered keyboard and mouse zoom precision and consistency</li>
++       <li>Improved performance of applying preferences</li>
++       <li>Chords playback is on by default (untick the "play" property to disable it)</li>
++       <li>Adding notes to a tuplet now adds them with respect to the tuplet's space</li>
++       <li>MuseScore 3 is now available as a Windows PortableApp</li>
++       <li>Altered Shift+L/R for leading space while in edit mode upon notehead</li>
++       <li>All symbols are now available for the plugins</li>
++       </ul>
++
++       <p>Fixes</p>
++       <ul>
++       <li>JACK audio/MIDI worked incorrectly on some platforms</li>
++       <li>#148311: Loop playback skipped final rests in the last measure</li>
++       <li>MIDI note-off events were not sent in some cases</li>
++       <li>Undoing slur addition to a range only removed one slur</li>
++       <li>Canceling a selection worked incorrectly in some cases </li>
++       <li>macOS package was not notarized in Apple</li>
++       <li>Various fixes for the text editing process</li>
++       <li>Fixed an issue when hiding notes or rests in a voice > 1 causes stems/beams to flip in a bad and unexpected way</li>
++       <li>Fixed an issue when two grace notes disabling vertical chord alignment (Maximum Shift Above)</li>
++       <li>Fixed an issue when "maximum shift above" leading to layout weirdness if measure has rhythm slashes and rests</li>
++       <li>Fixed an issue with inactive "Realize chord symbols" command</li>
++       <li>Fixed an issue when key signature appears in multiple places on the single staff</li>
++       <li>Fixed an issue with missing grid of measures in the "timeline" view</li>
++       <li>Fixed an issue with appearing of empty dialog during the "Save Online"</li>
++       <li>Fixed an crash during the drag &amp; drop of volta in continuous view</li>
++       <li>Brackets were displaced in Continuous View</li>
++       <li>Nested tuplets in linked staves led to corruption</li>
++       <li>Octave selection was inconsistent in note input mode</li>
++       <li>Voices worked incorrectly in the parts dialog in some cases</li>
++       <li>Misclicking when attempting to create a range selection caused the current selection to be lost</li>
++       <li>On-screen rendering of synthetically emboldened fonts was broken in some cases</li>
++       <li>Smooth scrolling worked wrong in Continuous view when dealing with repeats</li>
++       <li>Saving Online a yet unsaved or uncompressed (mscx) file didn't work</li>
++       <li>Fixed zoom-box 100% selection bug</li>
++       <li>Fixed a bug with ignoring of blank lines at top of text elements</li>
++       <li>Fixed an issue when cut/paste, drag/drop in Piano Roll Editor does not preserve NoteEvent values</li>
++       <li>Fixed a playback of chord symbols attached to fret diagrams</li>
++       <li>Fixed a note entry suggested position with no selection and last selected note in voice > 1</li>
++       <li>Fixed a display of the bold and underlined texts</li>
++       <li>Fixed the "Save Online" on AppImages</li>
++       </ul>
 +      </description>
 +    </release>
 +    <release date="2020-02-07" version="3.4.2">
