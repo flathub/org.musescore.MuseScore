@@ -31,7 +31,8 @@ finish-args:
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
   # JACK
-  - --device=shm
+  - --filesystem=xdg-run/pipewire-0
+  - --socket=system-bus
 
 cleanup-commands:
   # Cleanup after QtWebKit
@@ -47,10 +48,7 @@ modules:
       - ./waf build -j $FLATPAK_BUILDER_N_JOBS
       - ./waf install
     cleanup:
-      - /bin
-      - /share
-      - /lib/jack
-      - /lib/libjackserver.so*
+      - '*'
     sources:
       - type: archive
         url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
