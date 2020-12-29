@@ -125,8 +125,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.6_public_beta.tar.gz
-        sha256: e127d288ee905942fb2190cd98b1878e08182dfeea7b4e17694bc7b03d62f33b
+        url: https://github.com/musescore/MuseScore/archive/v3.6_release_candidate.tar.gz
+        sha256: ffdee7ecac8c4b949939a4a74497b94f79a07abd1e6f030b708f62854146f822
       - type: archive
         url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
         sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
@@ -135,7 +135,7 @@ modules:
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
           # https://github.com/musescore/MuseScore/releases/
-          - echo '2cbee43' > mscore/revision.h
+          - echo '10dee08' > mscore/revision.h
       - type: patch
         path: patches/musescore-mime-use-appid-icons.patch
       - type: patch
