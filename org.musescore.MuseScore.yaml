@@ -121,7 +121,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/musescore/MuseScore/archive/v3.6.tar.gz
-        sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        sha256: 554cfbb329b184260efdd9522777b2d8422c21f535d0955720517c37912d9ccf
       - type: archive
         url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
         sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
