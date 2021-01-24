@@ -2,17 +2,132 @@ diff --git a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in b/build/Linu
 index d52ce502f..d9237744d 100644
 --- a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
 +++ b/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
-@@ -82,6 +82,232 @@
+@@ -82,6 +82,347 @@
      <content_attribute id="money-purchasing">mild</content_attribute>
    </content_rating>
    <releases>
-+    <release date="2020-12-29" version="3.6releace_candidate">
-+    </release>
-+    <release date="2020-12-15" version="3.6public_beta">
-+    </release>
-+    <release date="2020-11-30" version="3.6private_beta">
-+    </release>
-+    <release date="2020-11-16" version="3.6alpha">
++    <release date="2021-01-14" version="3.6">
++    <description>
++      <p>New</p>
++      <ul>
++        <li>Added the new default notation fonts "Leland"</li>
++<li>Added the new default text font "Edwin"</li>
++<li>Added a new dialog that suggests trying out the new engraving defaults</li>
++<li>Added automatic score ordering and bracketing</li>
++<li>Added automatic vertical justification of staves</li>
++<li>Added Mountain Dulcimer instrument and 3-string tab presets</li>
++<li>Added portamento for FLUID synthesiser</li>
++<li>Added Petaluma notation font</li>
++<li>Added mnemonics for "Save", "Save As" and "Resource Manager"</li>
++</ul>
++<p>Improvements</p>
++<ul>
++<li>Redesigned the score migration dialog and the algorithm for applying new styles</li>
++<li>Improved the vertical staff justification algorithm</li>
++<li>First system indentation now takes the maximum of the length of the instruments labels and the style parameter</li>
++<li>Added a support of measure number interval at multi-measure rests</li>
++<li>Improved the recognition of instruments when loading a pre-3.6 score</li>
++<li>Altered default canvas background colour</li>
++<li>Improved functionality and appearance of 'Add Palettes' button</li>
++<li>Implemented a new "Export" dialog</li>
++<li>Improved the score symbols appearance</li>
++<li>Updated Bravura notation font to version 1.39</li>
++<li>Extended the set of accidentals</li>
++<li>Implemented a third stroke style for minim-based two-note tremolos</li>
++<li>Added extended fermata symbols to MusicXML I/O</li>
++<li>Updated SMuFL to the latest version 1.3</li>
++<li>Added support for triple sharp and triple flat</li>
++<li>Replaced the accidentals from Emmentaler with improved ones from Parnassus</li>
++<li>Added an indication of sounding pitch if the global concert pitch toggle is off and the current instrument has an actual pitch</li>
++<li>Added heavy, reverse end and heavy double barlines</li>
++<li>Added Sicilian translation</li>
++<li>The Edit Style dialog is no longer modal: the score can now be traversed while the dialog is open</li>
++<li>Added an alternative choice of “To Coda”</li>
++<li>Added a harmony duration interpretation</li>
++<li>MacOS window title bars now update according to the selected theme in MuseScore</li>
++<li>Added an automatic change of theme in MuseScore according to the MacOS dark/light mode setting</li>
++<li>The width of accidental symbols in the font is now honoured during drawing</li>
++<li>Solo instrument names are ending in "solo"</li>
++<li>Improved a collision avoidance between accidentals and ledger lines</li>
++<li>Improved an appearance of shadow notes</li>
++<li>Improved layout of the "Edit Style" dialog</li>
++<li>Cleaned up all unnecessary spaces and words used in file export</li>
++<li>Order of buttons in "Score migration" dialog is now platform-specific</li>
++<li>Improved search behavior in "Palettes"</li>
++<li>Added an option for applying new text font (Edwin) to imported MusicXML scores</li>
++<li>Replenished collection of demo scores</li>
++<li>Improved layout of the "Edit Style" dialog</li>
++<li>Improved handling of score orders</li>
++<li>Improved the appearance of ambitus caps</li>
++<li>Improved the appearance of the score migration dialog</li>
++</ul>
++<p>Fixes</p>
++<ul>
++<li>Fixed a bug preventing generation of square braces for an instrument with multiple staves.</li>
++<li>Fixed an issue where style dialog loses setting of chord symbol radio buttons</li>
++<li>Fixed an issue with measure numbers not showing when first staff is cut away</li>
++<li>Fixed an issue where ledger lines only showed correctly when staff line spacing set to 0.5 increments (i.e 1.5, 2.0, etc.)</li>
++<li>Fixed an issue with image resize not correctly honouring aspect ratio</li>
++<li>Fixed an issue with "Select Similar Beat" command not working with shortened measures</li>
++<li>Fixed an issue where glissandos collide with double-digit start fretmarks</li>
++<li>Fixed glissando and portamento playback</li>
++<li>Enabled selection of text using the mouse in Palettes search field</li>
++<li>Adjusted the "Range-transpose" shortcuts</li>
++<li>Adjusted the appearance of dotted lines</li>
++<li>Staff visibility changes are now allowed mid-score</li>
++<li>Fixed an issue with the appearance of additive time signatures</li>
++<li>Fixed an issue where Mandolin unintentionally has a Grand Piano sound</li>
++<li>Expanded the list of special characters in "Special characters -> Common Symbols"</li>
++<li>Jump at Volta End no longer skips last measure</li>
++<li>Fixed a crash when switching instruments from an instrument with tabulature</li>
++<li>Fixed an issue when toggling between clefs of unpitched and pitched instruments, which led to a crash</li>
++<li>Fixed an issue where pressing Enter in the Score Properties dialog applies to the "New…" button rather than the "OK" button</li>
++<li>Fixed a crash when deleting header/footer text after hiding</li>
++<li>Fixed an issue where removing tuplets after inserting measures caused corruption/crash</li>
++<li>Reduced useless whitespace in JSON files</li>
++<li>Disabled auto collision avoidance for rests which do not have auto-placement enabled</li>
++<li>Fixed an issue where rests cannot be merged together when the measure has 3 or 4 voices</li>
++<li>Fixed an issue with the "Flatten all Beams" setting being ignored on score reload</li>
++<li>Fixed an issue where voice-1 rests collide with voice-3 rhythm slashes</li>
++<li>Fixed an issue where C time signature does not update</li>
++<li>Fixed an issue with readability of the tempo field by screen readers</li>
++<li>Fixed a palette search shortcut functionality issue</li>
++<li>Fixed an issue with missing space between the key signature and the first note when the time signature is hidden</li>
++<li>Fixed a freeze when a tie has the same start and end note</li>
++<li>Fixed a crash when deleting or changing a time signature in a multi-measure rest</li>
++<li>Fixed an issue with import of MusicXML files from the new version of Finale</li>
++<li>Fixed an incorrect tuplet calculation on a two-note tremolo</li>
++<li>Removed support for the "place at middle of stem" option for single-note tremolos</li>
++<li>Fixed an issue where duplication of voltas leads to following voltas being ignored</li>
++<li>Fixed an issue with MusicXML import of changed transpositions</li>
++<li>Fixed an issue where hairpin export stops halfway</li>
++<li>Fixed an issue with FirstSystemIndentation style setting is not taking care lenght instrument labels</li>
++<li>Fixed an issue when MusicXML import not honored "measure-style/slash"</li>
++<li>Fixed an issue with application of new styles to 'recent' scores</li>
++<li>Fixed an issue with application of new styles to pre-3.6 scores</li>
++<li>Fixed an issue with incorrect brace scaling</li>
++<li>Fixed an issue with import of MusicXML tempo changes</li>
++<li>Fixed an issue where aligned pedal lines jump wildly while being dragged</li>
++<li>Fixed an issue with updating of translations</li>
++<li>Fixed an issue with export of fretboard diagrams to MusicXML</li>
++<li>Fixed an issue where atonal key signatures caused spacing issues</li>
++<li>Fixed an issue with the "Show MIDI controls in mixer" checkbox in "Preferences" dialog</li>
++<li>Fixed an issue with inconsistent stem directions on middle-line beamed notes</li>
++<li>Fixed an issue with application of new styles to 'recent' scores</li>
++<li>Fixed an issue with measure numbers colliding with brackets</li>
++<li>Fixed an issue with triggering of translation process after a language switch</li>
++<li>Fixed an issue where fingering was wrongly scaled with note size</li>
++<li>Fixed an issue with cutaway courtesy clefs not showing</li>
++<li>Fixed an issue with export of 32nd-note tuplets into MusicXML format</li>
++<li>Removed unnecessary rounding of BPM value in "Play panel"</li>
++<li>Fixed an issue with unexpected behavior of "Esc" key in "Edit Style" dialog</li>
++<li>Fixed a crash when importing a file with an incomplete tuplet</li>
++<li>Fixed an issue where adding instruments on top of others whose parts have been created leads to score corruption</li>
++<li>Fixed an issue with styles in the "converter" mode</li>
++<li>Fixed an issue where changing any property on a text line resets all styled properties to default</li>
++<li>Fixed an issue where the "Custom" string in "Instrument &gt; Order" shows untranslated</li>
++</ul>
++</description>
 +    </release>
 +    <release date="2020-10-16" version="3.5.2">
 +      <url>https://github.com/musescore/MuseScore/releases/tag/v3.5.2</url>
