@@ -48,10 +48,7 @@ modules:
       - ./waf build -j $FLATPAK_BUILDER_N_JOBS
       - ./waf install
     cleanup:
-      - /bin
-      - /share
-      - /lib/jack
-      - /lib/libjack*.so*
+      - '*'
     sources:
       - type: archive
         url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
