@@ -58,6 +58,7 @@ modules:
     config-opts:
       - --disable-static
       - --without-oss
+      - --without-jack
     sources:
       - type: archive
         url: http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
