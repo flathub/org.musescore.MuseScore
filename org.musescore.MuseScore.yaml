@@ -32,7 +32,7 @@ finish-args:
   - --env=TMPDIR=/var/tmp
   # JACK
   - --filesystem=xdg-run/pipewire-0
-  - --socket=system-bus
+  - --system-talk-name=org.freedesktop.RealtimeKit1
 
 cleanup-commands:
   # Cleanup after QtWebKit
