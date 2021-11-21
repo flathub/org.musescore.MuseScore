@@ -51,8 +51,8 @@ modules:
       - '*'
     sources:
       - type: archive
-        url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
-        sha256: a20a32366780c0061fd58fbb5f09e514ea9b7ce6e53b080a44b11a558a83217c
+        url: https://github.com/jackaudio/jack2/archive/refs/tags/v1.9.19.tar.gz
+        sha256: 9030f4dc11773351b6ac96affd9c89803a5587ebc1b091e5ff866f433327e4b0
 
   - name: portaudio
     config-opts:
