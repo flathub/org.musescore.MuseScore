@@ -33,6 +33,8 @@ finish-args:
   # JACK
   - --filesystem=xdg-run/pipewire-0
   - --system-talk-name=org.freedesktop.RealtimeKit1
+  # Allow UPower access 
+  - --system-talk-name=org.freedesktop.UPower
 
 cleanup-commands:
   # Cleanup after QtWebKit
