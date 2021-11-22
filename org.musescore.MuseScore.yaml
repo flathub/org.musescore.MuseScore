@@ -93,7 +93,7 @@ modules:
   - name: musescore
     buildsystem: cmake
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RELEASE
+      - -DCMAKE_BUILD_TYPE=RelWihDebInfo
       - -DBUILD_ALSA=OFF
       - -DBUILD_JACK=ON
       - -DBUILD_TELEMETRY_MODULE=OFF
