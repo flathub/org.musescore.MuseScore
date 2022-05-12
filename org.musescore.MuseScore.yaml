@@ -109,7 +109,7 @@ modules:
     build-commands:
       - make lrelease
     post-install:
-      - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
+      - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/${FLATPAK_ID}.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
       - ln -s /app/share/mscore-3.6/locale /app/share/mscore/translations
