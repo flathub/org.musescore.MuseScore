@@ -2,10 +2,75 @@ diff --git a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in b/build/Linu
 index d52ce502f..d9237744d 100644
 --- a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
 +++ b/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
-@@ -82,6 +82,347 @@
+@@ -82,6 +82,412 @@
      <content_attribute id="money-purchasing">mild</content_attribute>
    </content_rating>
    <releases>
++    <release date="2021-02-08" version="3.6.2">
++      <url>https://github.com/musescore/MuseScore/releases/tag/v3.6.2</url>
++      <description>
++<p>Fixes</p>
++<ul>
++<li>Fixed an issue with gap between staff and final barline with courtesy clef</li>
++<li>Fixed an issue when removing spanners from measures outside of the rewrite range</li>
++<li>Fixed an accessibility issue with the score migration dialog</li>
++<li>Fixed a crash related to QtWebEngineProcess after update</li>
++<li>Fixed an issue with timeline showing part name rather than instrument name</li>
++<li>Fixed an issue with focus of dockable windows when visibility is toggled</li>
++<li>Fixed an issue where custom gliss text reverts to default "gliss"</li>
++<li>Added missing Flügelhorns to instrument ordering definitions</li>
++<li>Fixed an issue where beams cannot be connected over quarter rests</li>
++<li>Fixed an issue where staff spacers do not work on last system of page</li>
++<li>Fixed an issue with broken swapping of notes/chords with Shift + Left/Right</li>
++<li>Fixed an issue with incomplete import from ScoreScan XML file</li>
++<li>Fixed an issue with unsaved default settings to pre-3.6 score after 'reset styles to default'</li>
++<li>Fixed an issue with Banjo fifth string fret numbers</li>
++<li>Fixed an issue where invisible breath marks impact layout</li>
++<li>Fixed a crash during the opening of a score with a missing section break</li>
++<li>Applying tremolo is now a toggle operation</li>
++<li>Fixed an issue where the Mixer panel is not fully shown when opened</li>
++<li>Fixed an issue where an empty rehearsal mark is not deleted after entering a system break</li>
++<li>Fixed an issue where multi-measure rest numbers can collide with other elements</li>
++<li>Fixed an issue where deleting a breath/caesura leads to the wrong note being selected</li>
++<li>Fixed an issue when parts inherit non-default style from score</li>
++<li>Fixed a crash when changing time signature at the beginning of a corrupted measure</li>
++<li>Fixed an issue with unreadable chord symbols</li>
++<li>Updated the close icon for Import Midi Panel (and Find/GoTo)</li>
++<li>Fixed an issue with auto-sizing of vertical frames when dragging the height handle</li>
++</ul>
++      </description>
++    </release>
++    <release date="2021-01-27" version="3.6.1">
++      <url>https://github.com/musescore/MuseScore/releases/tag/v3.6.1</url>
++      <description>
++<p>Fixes</p>
++<ul>
++<li>Fixed a crash on open of a file with start repeat in continuous view</li>
++<li>Fixed an issue when switching tabs when opening a score while "Score migration dialog" is open</li>
++<li>Fixed crashes when rearranging instrument positions and changing Ordering</li>
++<li>Fixed an issue where the window is marked as modified, even when the last score is closed</li>
++<li>Fixed a crash when opening scores with large orchestration created in older versions of MuseScore</li>
++<li>Fixed an issue with incorrect order of Violins in Orchestra template</li>
++<li>Fixed a crash when hiding palettes</li>
++<li>Fixed an export failure when part name contains a slash</li>
++<li>Fixed an issue where spacers do not function when vertical justification is enabled</li>
++<li>Added an option to Copy SMuFL Symbol Code for symbols in Master Palette</li>
++<li>Clef changes are no longer visible on hidden staves</li>
++<li>Fixed an issue where first system indentation can cause measures to not fit on system</li>
++<li>Fixed an issue with wrong key signatures upon "Reset Al Styles" in concert pitch scores</li>
++<li>Display symbols' SMuFL name in Symbols Palette</li>
++<li>Removed corner radius from new default rehearsal mark style</li>
++<li>Fixed an issue where custom style defaults are ignored when creating new score from template</li>
++<li>Fixed an issue where applying a key change to a selection causes a crash when transposing instruments are involved</li>
++<li>Fixed an issue where an incomplete voice in local time signature leads to corruption upon import</li>
++<li>Fixed an issue where swapping notes in a two-note tremolo causes corrupted tremolo, and crash</li>
++<li>Fixed an issue where two-note tremolos display incorrectly on a stave with custom scale</li>
++<li>Fixed an issue where measure number offset changes on reload</li>
++<li>It is now possible to copy/paste the LetRing, PalmMute and Vibrato elements</li>
++<li>The link on "Score migration dialog" now leads to Bilibili if using Chinese</li>
++</ul>
++     </description>
++    </release>
 +    <release date="2021-01-14" version="3.6">
 +    <description>
 +      <p>New</p>

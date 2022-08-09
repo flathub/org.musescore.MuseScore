@@ -4,17 +4,15 @@ app-id: org.musescore.MuseScore
 # We use 5.14 because MuseScore 3.6 block the build on 5.15
 # due to a bug. This disable JACK as well.
 base: io.qt.qtwebengine.BaseApp
-base-version: '5.14'
+base-version: '5.15-21.08'
 
 runtime: org.kde.Platform
-runtime-version: '5.14'
+runtime-version: '5.15-21.08'
 sdk: org.kde.Sdk
 
 command: mscore
 rename-desktop-file: mscore.desktop
 rename-icon: mscore
-desktop-file-name-prefix: "(beta) "
-branch: beta
 
 finish-args:
   # X11 + XShm access
@@ -34,9 +32,11 @@ finish-args:
   - --filesystem=host
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
-  # JACK (disabled due to downgrade to 5.14)
-  #- --filesystem=xdg-run/pipewire-0
-  #- --socket=system-bus
+  # JACK
+  - --filesystem=xdg-run/pipewire-0
+  - --system-talk-name=org.freedesktop.RealtimeKit1
+  # Allow UPower access 
+  - --system-talk-name=org.freedesktop.UPower
 
 cleanup-commands:
   # Cleanup after QtWebKit
@@ -45,27 +45,24 @@ cleanup-commands:
 
 modules:
 
-# Reenable when it is rebuilt with 5.15
-#  - name: jack2
-#    buildsystem: simple
-#    build-commands:
-#      - ./waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --classic
-#      - ./waf build -j $FLATPAK_BUILDER_N_JOBS
-#      - ./waf install
-#    cleanup:
-#      - /bin
-#      - /share
-#      - /lib/jack
-#      - /lib/libjack*.so*
-#    sources:
-#      - type: archive
-#        url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
-#        sha256: a20a32366780c0061fd58fbb5f09e514ea9b7ce6e53b080a44b11a558a83217c
+  - name: jack2
+    buildsystem: simple
+    build-commands:
+      - ./waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --classic
+      - ./waf build -j $FLATPAK_BUILDER_N_JOBS
+      - ./waf install
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
+        sha256: a20a32366780c0061fd58fbb5f09e514ea9b7ce6e53b080a44b11a558a83217c
 
   - name: portaudio
     config-opts:
       - --disable-static
       - --without-oss
+      - --without-jack
     sources:
       - type: archive
         url: http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
@@ -100,10 +97,9 @@ modules:
   - name: musescore
     buildsystem: cmake
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RELEASE
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_ALSA=OFF
-      # Reenable JACK when re-building with 5.15
-      - -DBUILD_JACK=OFF
+      - -DBUILD_JACK=ON
       - -DBUILD_TELEMETRY_MODULE=OFF
       - -DMUSESCORE_BUILD_CONFIG=release
     build-options:
@@ -115,7 +111,7 @@ modules:
     build-commands:
       - make lrelease
     post-install:
-      - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
+      - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/${FLATPAK_ID}.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
       - ln -s /app/share/mscore-3.6/locale /app/share/mscore/translations
@@ -129,8 +125,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.6.tar.gz
-        sha256: 554cfbb329b184260efdd9522777b2d8422c21f535d0955720517c37912d9ccf
+        url: https://github.com/musescore/MuseScore/archive/v3.6.2.tar.gz
+        sha256: c37acc6d7a316f04925265d2d22a35d715888580e16eff846e9b621954133c45
       - type: archive
         url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
         sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
@@ -139,7 +135,7 @@ modules:
         commands:
           - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
           # https://github.com/musescore/MuseScore/releases/
-          - echo '1977cb3' > mscore/revision.h
+          - echo '3224f34' > mscore/revision.h
       - type: patch
         path: patches/musescore-mime-use-appid-icons.patch
       - type: patch
