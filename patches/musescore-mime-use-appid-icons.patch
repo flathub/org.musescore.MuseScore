@@ -20,7 +20,7 @@ index ed2abaed4..a01580f21 100644
          <magic>
              <match type="string" value="&lt;?xml" offset="0">
                  <match type="string" value="&lt;museScore" offset="0:128">
-@@ -68,7 +68,7 @@
+@@ -68,18 +68,17 @@
          <comment>MusicXML compressed score</comment>
          <glob pattern="*.mxl"/>
          <sub-class-of type="application/zip"/>
@@ -29,7 +29,10 @@ index ed2abaed4..a01580f21 100644
      </mime-type>
  
      <mime-type type="application/vnd.recordare.musicxml+xml">
-@@ -79,7 +79,7 @@
+         <!-- http://www.musicxml.com/for-developers/musicxml-dtd/ -->
+         <comment>MusicXML uncompressed score</comment>
+         <glob pattern="*.musicxml"/><!-- preferred extension must go first -->
+-        <glob pattern="*.xml" weight="40"/><!-- reduced weight (default 50) to avoid matching ordinary XML files -->
          <sub-class-of type="application/xml"/>
          <root-XML namespaceURI="" localName="score-partwise"/>
          <root-XML namespaceURI="" localName="score-timewise"/>

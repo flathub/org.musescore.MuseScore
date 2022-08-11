@@ -1,20 +1,17 @@
 ---
 app-id: org.musescore.MuseScore
 
-# We use 5.14 because MuseScore 3.6 block the build on 5.15
-# due to a bug. This disable JACK as well.
 base: io.qt.qtwebengine.BaseApp
-base-version: '5.14'
+base-version: '5.15-21.08'
 
 runtime: org.kde.Platform
-runtime-version: '5.14'
+runtime-version: '5.15-21.08'
 sdk: org.kde.Sdk
 
 command: mscore
 rename-desktop-file: mscore.desktop
 rename-icon: mscore
 desktop-file-name-prefix: "(beta) "
-branch: beta
 
 finish-args:
   # X11 + XShm access
@@ -31,12 +28,24 @@ finish-args:
   - --device=all
   # Allow loading/saving files from anywhere
   # (portals don’t work yet)
-  - --filesystem=host
+  - --filesystem=home
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
-  # JACK (disabled due to downgrade to 5.14)
-  #- --filesystem=xdg-run/pipewire-0
-  #- --socket=system-bus
+  # JACK
+  - --filesystem=xdg-run/pipewire-0
+  # Allow UPower access
+  - --system-talk-name=org.freedesktop.UPower
+  - --env=VST3_PATH=/app/extensions/Plugins/vst3
+
+add-extensions:
+  org.freedesktop.LinuxAudio.Plugins:
+    directory: extensions/Plugins
+    version: '21.08'
+    add-ld-path: lib
+    subdirectories: true
+    merge-dirs: vst3
+    no-autodownload: true
+    autodelete: false
 
 cleanup-commands:
   # Cleanup after QtWebKit
@@ -44,40 +53,11 @@ cleanup-commands:
   - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
 
 modules:
-
-# Reenable when it is rebuilt with 5.15
-#  - name: jack2
-#    buildsystem: simple
-#    build-commands:
-#      - ./waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --classic
-#      - ./waf build -j $FLATPAK_BUILDER_N_JOBS
-#      - ./waf install
-#    cleanup:
-#      - /bin
-#      - /share
-#      - /lib/jack
-#      - /lib/libjack*.so*
-#    sources:
-#      - type: archive
-#        url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
-#        sha256: a20a32366780c0061fd58fbb5f09e514ea9b7ce6e53b080a44b11a558a83217c
-
-  - name: portaudio
-    config-opts:
-      - --disable-static
-      - --without-oss
-    sources:
-      - type: archive
-        url: http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
-        sha256: f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513
-    cleanup:
-      - /lib/pkgconfig
-      - /include
-      - '*.la'
-
+  - shared-modules/linux-audio/jack2.json
   - name: portmidi
     buildsystem: cmake-ninja
     config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/app/lib
       - -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=/app/lib
       - -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app/bin
@@ -98,27 +78,26 @@ modules:
       - '*.la'
 
   - name: musescore
-    buildsystem: cmake
+    buildsystem: cmake-ninja
+    builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RELEASE
-      - -DBUILD_ALSA=OFF
-      # Reenable JACK when re-building with 5.15
-      - -DBUILD_JACK=OFF
-      - -DBUILD_TELEMETRY_MODULE=OFF
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_JACK=ON
+      - -DBUILD_UNIT_TESTS=OFF
+      - -DBUILD_VST=ON
+      - -DVST3_SDK_PATH=../VST_SDK/vst3sdk
       - -DMUSESCORE_BUILD_CONFIG=release
-    build-options:
-      arch:
-        aarch64:
-          config-opts:
-            # Crash reporter not ported to ARM64 yet
-            - -DBUILD_CRASH_REPORTER=OFF
-    build-commands:
-      - make lrelease
+    cleanup:
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+      - '*.a'
     post-install:
-      - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/org.musescore.MuseScore.xml
+      - install -d /app/extensions/Plugins
+      - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/${FLATPAK_ID}.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-3.6/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-4.0/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -129,20 +108,17 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.6.tar.gz
-        sha256: 554cfbb329b184260efdd9522777b2d8422c21f535d0955720517c37912d9ccf
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0_alpha_2.tar.gz
+        sha256: 164c3920f7ca80059c0534cb8475b8acf0c86c8ac0536b8d415ef55949fcc64f
       - type: archive
-        url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
-        sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
-        dest: thirdparty/libcrashreporter-qt
-      - type: shell
-        commands:
-          - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
-          # https://github.com/musescore/MuseScore/releases/
-          - echo '1977cb3' > mscore/revision.h
+        url: https://download.steinberg.net/sdk_downloads/vst-sdk_3.7.5_build-44_2022-05-19.zip
+        sha256: c671e31e71613d1de4205e9bb2dfe2a7c83582b6c410ee23cdf2fc5bbd600537
+        dest: VST_SDK
       - type: patch
         path: patches/musescore-mime-use-appid-icons.patch
       - type: patch
         path: patches/musescore-appdata.diff
       - type: patch
-        path: patches/musescore-webengine.diff
+        path: patches/musescore-fixes.patch
+      - type: patch
+        path: patches/musescore-vst-build.patch
