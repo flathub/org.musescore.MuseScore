@@ -10,20 +10,6 @@ index 6713e3aeef..58cc8cee14 100644
  
  IF(BUILD_JACK)
       IF(MINGW OR MSVC)
-diff --git a/src/framework/global/types/string.cpp b/src/framework/global/types/string.cpp
-index e255f17a21..06b640241d 100644
---- a/src/framework/global/types/string.cpp
-+++ b/src/framework/global/types/string.cpp
-@@ -477,6 +477,9 @@ String String::fromQString(const QString& str)
- 
- QString String::toQString() const
- {
-+    if (empty()) {
-+        return QString();
-+    }
-     const char16_t* u = &constStr().front();
-     static_assert(sizeof(QChar) == sizeof(char16_t));
-     return QString(reinterpret_cast<const QChar*>(u), static_cast<int>(size()));
 diff --git a/src/framework/vst/CMakeLists.txt b/src/framework/vst/CMakeLists.txt
 index 368d686b53..7c0201a7dd 100644
 --- a/src/framework/vst/CMakeLists.txt

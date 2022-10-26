@@ -2,23 +2,23 @@
 app-id: org.musescore.MuseScore
 
 base: io.qt.qtwebengine.BaseApp
-base-version: '5.15-21.08'
+base-version: '5.15-22.08'
 
 runtime: org.kde.Platform
-runtime-version: '5.15-21.08'
+runtime-version: '5.15-22.08'
 sdk: org.kde.Sdk
 
 command: mscore
-rename-desktop-file: mscore.desktop
 rename-icon: mscore
+copy-icon: true
 desktop-file-name-prefix: "(beta) "
 
 finish-args:
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
-  # Enable Wayland but keep X11 default for now
-  - --socket=wayland
+  # Too many wayland bugs.
+  # --socket=wayland
   - --env=QT_QPA_PLATFORM=xcb
   # MuseScore.com connectivity
   - --share=network
@@ -40,7 +40,7 @@ finish-args:
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    version: '21.08'
+    version: '22.08'
     add-ld-path: lib
     subdirectories: true
     merge-dirs: vst3
@@ -53,7 +53,6 @@ cleanup-commands:
   - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
 
 modules:
-  - shared-modules/linux-audio/jack2.json
   - name: portmidi
     buildsystem: cmake-ninja
     config-opts:
@@ -86,6 +85,8 @@ modules:
       - -DBUILD_UNIT_TESTS=OFF
       - -DBUILD_VST=ON
       - -DVST3_SDK_PATH=../VST_SDK/vst3sdk
+      # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
+      - -DBUILD_CRASHPAD_CLIENT=OFF
       - -DMUSESCORE_BUILD_CONFIG=release
     cleanup:
       - /include
@@ -108,8 +109,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0_alpha_2.tar.gz
-        sha256: 164c3920f7ca80059c0534cb8475b8acf0c86c8ac0536b8d415ef55949fcc64f
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0_beta.tar.gz
+        sha256: 6f9604905ce644bc540529ef9496d6772c3c8b4936288c3f3056f00ae900aafd
       - type: archive
         url: https://download.steinberg.net/sdk_downloads/vst-sdk_3.7.5_build-44_2022-05-19.zip
         sha256: c671e31e71613d1de4205e9bb2dfe2a7c83582b6c410ee23cdf2fc5bbd600537
