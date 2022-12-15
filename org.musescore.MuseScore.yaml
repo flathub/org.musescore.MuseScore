@@ -82,8 +82,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_JACK=ON
       - -DBUILD_UNIT_TESTS=OFF
-      - -DBUILD_VST=ON
-      - -DVST3_SDK_PATH=../VST_SDK/vst3sdk
+      # Upstream doesn't support Linux
+      - -DBUILD_VST=OFF
       # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
       - -DBUILD_CRASHPAD_CLIENT=OFF
       - -DMUSESCORE_BUILD_CONFIG=release
@@ -110,17 +110,10 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0_rc.tar.gz
-        sha256: b83e634ecf6d7948270563f41e81423d8c4503edc31206df77a8c7b2a73f7e1b
-      - type: archive
-        url: https://download.steinberg.net/sdk_downloads/vst-sdk_3.7.5_build-44_2022-05-19.zip
-        sha256: c671e31e71613d1de4205e9bb2dfe2a7c83582b6c410ee23cdf2fc5bbd600537
-        dest: VST_SDK
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0.tar.gz
+        sha256: 1384979d3a0c1c0e4c9f4f5f5f58aa7998ce7efd4408284e9f60345dce63eda3
       - type: patch
-        path: patches/musescore-mime-use-appid-icons.patch
-      - type: patch
-        path: patches/musescore-appdata.diff
-      - type: patch
-        path: patches/musescore-fixes.patch
-      - type: patch
-        path: patches/musescore-vst-build.patch
+        paths:
+          - patches/musescore-mime-use-appid-icons.patch
+          - patches/musescore-appdata.diff
+          - patches/musescore-fixes.patch
