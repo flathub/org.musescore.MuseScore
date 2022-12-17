@@ -1,0 +1,38 @@
+diff --git a/build/cmake/FindJack.cmake b/build/cmake/FindJack.cmake
+index 6713e3aeef..58cc8cee14 100644
+--- a/build/cmake/FindJack.cmake
++++ b/build/cmake/FindJack.cmake
+@@ -3,6 +3,7 @@
+ ## Find JACK >= JACK_MIN_VERSION
+ ##
+ 
++include(UsePkgConfig1)
+ 
+ IF(BUILD_JACK)
+      IF(MINGW OR MSVC)
+diff --git a/src/framework/vst/CMakeLists.txt b/src/framework/vst/CMakeLists.txt
+index 368d686b53..7c0201a7dd 100644
+--- a/src/framework/vst/CMakeLists.txt
++++ b/src/framework/vst/CMakeLists.txt
+@@ -87,7 +87,6 @@ set(MODULE_LINK
+ if (OS_IS_LIN)
+     set(MODULE_LINK
+         ${MODULE_LINK}
+-        stdc++fs
+         )
+ endif()
+ 
+diff --git a/src/framework/vst/internal/vstconfiguration.cpp b/src/framework/vst/internal/vstconfiguration.cpp
+index 838f00f2af..5d4a3dd559 100644
+--- a/src/framework/vst/internal/vstconfiguration.cpp
++++ b/src/framework/vst/internal/vstconfiguration.cpp
+@@ -34,7 +34,8 @@ static const mu::io::path_t KNOWN_PLUGINS_DIR("/vst");
+ 
+ void VstConfiguration::init()
+ {
+-    settings()->setDefaultValue(USER_VST_PATHS, Val(""));
++    auto vst3Path = getenv("VST3_PATH");
++    settings()->setDefaultValue(USER_VST_PATHS, Val(vst3Path ? vst3Path : ""));
+     settings()->valueChanged(USER_VST_PATHS).onReceive(nullptr, [this](const Val&) {
+         m_userVstDirsChanged.send(userVstDirectories());
+     });

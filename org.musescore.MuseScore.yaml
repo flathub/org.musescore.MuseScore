@@ -2,22 +2,22 @@
 app-id: org.musescore.MuseScore
 
 base: io.qt.qtwebengine.BaseApp
-base-version: '5.15-21.08'
+base-version: '5.15-22.08'
 
 runtime: org.kde.Platform
-runtime-version: '5.15-21.08'
+runtime-version: '5.15-22.08'
 sdk: org.kde.Sdk
 
 command: mscore
-rename-desktop-file: mscore.desktop
 rename-icon: mscore
+copy-icon: true
 
 finish-args:
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
-  # Enable Wayland but keep X11 default for now
-  - --socket=wayland
+  # Too many wayland bugs.
+  # --socket=wayland
   - --env=QT_QPA_PLATFORM=xcb
   # MuseScore.com connectivity
   - --share=network
@@ -27,52 +27,34 @@ finish-args:
   - --device=all
   # Allow loading/saving files from anywhere
   # (portals don’t work yet)
-  - --filesystem=host
+  - --filesystem=home
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
   # JACK
   - --filesystem=xdg-run/pipewire-0
-  - --system-talk-name=org.freedesktop.RealtimeKit1
-  # Allow UPower access 
+  # Allow UPower access
   - --system-talk-name=org.freedesktop.UPower
+  - --env=VST3_PATH=/app/extensions/Plugins/vst3
+
+add-extensions:
+  org.freedesktop.LinuxAudio.Plugins:
+    directory: extensions/Plugins
+    version: '22.08'
+    add-ld-path: lib
+    subdirectories: true
+    merge-dirs: vst3
+    no-autodownload: true
+    autodelete: false
 
 cleanup-commands:
   # Cleanup after QtWebKit
   - rm -rf /app/include
-  - rm -rf /app/lib/{cmake,mkspecs,pkgconfig}
-
+  - rm -rf /app/lib/${FLATPAK_ARCH}-linux-gnu/{cmake,mkspecs,pkgconfig}
 modules:
-
-  - name: jack2
-    buildsystem: simple
-    build-commands:
-      - ./waf configure --prefix=/app --htmldir=/app/share/doc/jack/ --classic
-      - ./waf build -j $FLATPAK_BUILDER_N_JOBS
-      - ./waf install
-    cleanup:
-      - '*'
-    sources:
-      - type: archive
-        url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
-        sha256: a20a32366780c0061fd58fbb5f09e514ea9b7ce6e53b080a44b11a558a83217c
-
-  - name: portaudio
-    config-opts:
-      - --disable-static
-      - --without-oss
-      - --without-jack
-    sources:
-      - type: archive
-        url: http://www.portaudio.com/archives/pa_stable_v190600_20161030.tgz
-        sha256: f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513
-    cleanup:
-      - /lib/pkgconfig
-      - /include
-      - '*.la'
-
   - name: portmidi
     buildsystem: cmake-ninja
     config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/app/lib
       - -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=/app/lib
       - -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app/bin
@@ -93,26 +75,30 @@ modules:
       - '*.la'
 
   - name: musescore
-    buildsystem: cmake
+    buildsystem: cmake-ninja
+    builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWihDebInfo
-      - -DBUILD_ALSA=OFF
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_JACK=ON
-      - -DBUILD_TELEMETRY_MODULE=OFF
+      - -DBUILD_UNIT_TESTS=OFF
+      # Upstream doesn't support Linux
+      - -DBUILD_VST=OFF
+      # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
+      - -DBUILD_CRASHPAD_CLIENT=OFF
       - -DMUSESCORE_BUILD_CONFIG=release
-    build-options:
-      arch:
-        aarch64:
-          config-opts:
-            # Crash reporter not ported to ARM64 yet
-            - -DBUILD_CRASH_REPORTER=OFF
-    build-commands:
-      - make lrelease
+    cleanup:
+      # Delete the crashpad binary. It's useless.
+      - /bin/crashpad_handler
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+      - '*.a'
     post-install:
+      - install -d /app/extensions/Plugins
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/${FLATPAK_ID}.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-3.6/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-4.0/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -123,20 +109,10 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/v3.6.2.tar.gz
-        sha256: c37acc6d7a316f04925265d2d22a35d715888580e16eff846e9b621954133c45
-      - type: archive
-        url: https://github.com/dmitrio95/libcrashreporter-qt/archive/67c71923350c9197aa3e50eaf719d4336cc4ac33.tar.gz
-        sha256: 3e411d97e409d6ea5f4e0314e1fb076431e7eeb419b1f39da9359736c87033cc
-        dest: thirdparty/libcrashreporter-qt
-      - type: shell
-        commands:
-          - sed -i 's|setDesktopFileName("mscore")|setDesktopFileName("org.musescore.MuseScore")|' mscore/musescore.cpp
-          # https://github.com/musescore/MuseScore/releases/
-          - echo '3224f34' > mscore/revision.h
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0.tar.gz
+        sha256: 1384979d3a0c1c0e4c9f4f5f5f58aa7998ce7efd4408284e9f60345dce63eda3
       - type: patch
-        path: patches/musescore-mime-use-appid-icons.patch
-      - type: patch
-        path: patches/musescore-appdata.diff
-      - type: patch
-        path: patches/musescore-webengine.diff
+        paths:
+          - patches/musescore-mime-use-appid-icons.patch
+          - patches/musescore-appdata.diff
+          - patches/musescore-fixes.patch
