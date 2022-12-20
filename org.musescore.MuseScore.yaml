@@ -79,7 +79,6 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_JACK=ON
       - -DBUILD_UNIT_TESTS=OFF
       # Upstream doesn't support Linux
       - -DBUILD_VST=OFF
