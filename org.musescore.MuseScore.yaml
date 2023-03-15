@@ -108,8 +108,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0.1.tar.gz
-        sha256: 35367bdf473571ed6fb5df6a8d07f56c730c4bce92030216d7fc44bbb884bbe6
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0.2.tar.gz
+        sha256: 9907b75e6194405bf8c8d23d2bb1b03343c76258426a8aee11d161390fc4f06d
       - type: patch
         paths:
           - patches/musescore-mime-use-appid-icons.patch
