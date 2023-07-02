@@ -80,7 +80,6 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_JACK=ON
       - -DBUILD_UNIT_TESTS=OFF
       # Upstream doesn't support Linux
       - -DBUILD_VST=OFF
@@ -110,8 +109,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0.tar.gz
-        sha256: 1384979d3a0c1c0e4c9f4f5f5f58aa7998ce7efd4408284e9f60345dce63eda3
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0.2.tar.gz
+        sha256: 9907b75e6194405bf8c8d23d2bb1b03343c76258426a8aee11d161390fc4f06d
       - type: patch
         paths:
           - patches/musescore-mime-use-appid-icons.patch
