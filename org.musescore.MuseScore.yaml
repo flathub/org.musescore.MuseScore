@@ -35,7 +35,6 @@ finish-args:
   - --filesystem=xdg-run/pipewire-0
   # Allow UPower access
   - --system-talk-name=org.freedesktop.UPower
-  - --env=VST3_PATH=/app/extensions/Plugins/vst3
 
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
@@ -81,8 +80,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DMUE_BUILD_UNIT_TESTS=OFF
       # Upstream doesn't support Linux
-      - -DMUE_BUILD_VST_MODULE=OFF
-      # -DVST3_SDK_PATH=/run/build/musescore
+      - -DMUE_BUILD_VST_MODULE=ON
+      - -DVST3_SDK_PATH=/run/build/musescore/vst3sdk
       # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
       - -DMUE_BUILD_CRASHPAD_CLIENT=OFF
     cleanup:
@@ -110,9 +109,19 @@ modules:
       - type: archive
         url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.1.0-beta.tar.gz
         sha256: f8f049b2f867bddec1902bf1835a2518344ae99b8c0363bc1888ad688bc0e1a6
+      - type: git
+        url: https://github.com/steinbergmedia/vst3sdk.git
+        tag: v3.7.8_build_34
+        commit: 0041ef2c879c3c54c03d33cdc11a97eaebfb5752
+        dest: vst3sdk
       - type: patch
         paths:
           - patches/musescore-mime-use-appid-icons.patch
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
           - patches/musescore_simd_aarch64.patch
+      - type: patch
+        options:
+          - -d
+          - vst3sdk/public.sdk
+        path: patches/vst3_paths.patch
