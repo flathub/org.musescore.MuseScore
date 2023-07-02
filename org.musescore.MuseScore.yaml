@@ -46,7 +46,6 @@ add-extensions:
     merge-dirs: vst3
     no-autodownload: true
     autodelete: false
-
 cleanup-commands:
   # Cleanup after QtWebKit
   - rm -rf /app/include
@@ -116,3 +115,4 @@ modules:
           - patches/musescore-mime-use-appid-icons.patch
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
+          - patches/musescore_simd_aarch64.patch
