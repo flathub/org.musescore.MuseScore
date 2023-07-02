@@ -1,16 +1,5 @@
-From 4da1af6a7ffe6865486951c8ee3919929b8d8606 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Hubert=20Figui=C3=A8re?= <hub@figuiere.net>
-Date: Tue, 25 Oct 2022 09:33:39 -0400
-Subject: [PATCH] Validate strict
-
-- remove non-allowed icon
-- also remove duplicate release
----
- build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
-
 diff --git a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in b/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
-index 34ece141a540..b4d35335c190 100644
+index 2ff55728b0..bdb3c4ace8 100644
 --- a/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
 +++ b/build/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
 @@ -7,13 +7,12 @@
@@ -20,25 +9,24 @@ index 34ece141a540..b4d35335c190 100644
 -            $  appstream-util validate-relax [filename]
 +            $  appstream-util validate [filename]
      -->
-     <id>org.musescore.MuseScore@MSCORE_INSTALL_SUFFIX@</id>
+     <id>org.musescore.MuseScore@MUSESCORE_INSTALL_SUFFIX@</id>
      <metadata_license>CC0-1.0</metadata_license><!-- License of this file. See <project_license> for MuseScore license. -->
      <name>MuseScore</name>
      <summary>Create, play and print beautiful sheet music</summary>
--    <icon type="stock">mscore@MSCORE_INSTALL_SUFFIX@</icon>
+-    <icon type="stock">mscore@MUSESCORE_INSTALL_SUFFIX@</icon>
      <description>
          <p>MuseScore is cross-platform, multi-lingual, open source music notation software. It features an easy to use WYSIWYG editor with audio score playback for results that look and sound beautiful. It supports unlimited staves with up to four voices each, dynamics, articulations, lyrics, chords, lead sheet notation, import/export of MIDI and MusicXML, export to PDF and WAV, plus online score sharing.</p>
          <p>MuseScore can upload scores directly to the score sharing site musescore.com. Program support is provided on musescore.org.</p>
-@@ -115,6 +114,9 @@
+@@ -115,6 +114,8 @@
      </kudos>
      <!-- Only <releases> below this point please! -->
      <releases>
-+        <release date="2022-12-02" version="4.0.0_rc" />
-+        <release date="2022-10-24" version="4.0.0_beta" />
-+        <release date="2022-08-09" version="4.0.0_alpha_2" />
-         <release date="2021-02-08" version="3.6.2">
-             <url>https://musescore.org/en/3.6.2</url>
++        <release date="2023-06-28" version="4.1.0-beta" />
++        <release date="2023-03-13" version="4.0.2" />
+         <release date="2023-01-13" version="4.0.1">
+             <url>https://musescore.org/en/4.0.1</url>
          </release>
-@@ -130,9 +129,6 @@
+@@ -136,9 +137,6 @@
          <release date="2020-10-09" version="3.5.1">
              <url>https://musescore.org/en/3.5.1</url>
          </release>

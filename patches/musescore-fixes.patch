@@ -1,15 +1,3 @@
-diff --git a/build/cmake/FindJack.cmake b/build/cmake/FindJack.cmake
-index 6713e3aeef..58cc8cee14 100644
---- a/build/cmake/FindJack.cmake
-+++ b/build/cmake/FindJack.cmake
-@@ -3,6 +3,7 @@
- ## Find JACK >= JACK_MIN_VERSION
- ##
- 
-+include(UsePkgConfig1)
- 
- IF(BUILD_JACK)
-      IF(MINGW OR MSVC)
 diff --git a/src/framework/vst/CMakeLists.txt b/src/framework/vst/CMakeLists.txt
 index 368d686b53..7c0201a7dd 100644
 --- a/src/framework/vst/CMakeLists.txt

@@ -46,7 +46,6 @@ add-extensions:
     merge-dirs: vst3
     no-autodownload: true
     autodelete: false
-
 cleanup-commands:
   # Cleanup after QtWebKit
   - rm -rf /app/include
@@ -80,13 +79,12 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_JACK=ON
-      - -DBUILD_UNIT_TESTS=OFF
+      - -DMUE_BUILD_UNIT_TESTS=OFF
       # Upstream doesn't support Linux
-      - -DBUILD_VST=OFF
+      - -DMUE_BUILD_VST_MODULE=OFF
+      # -DVST3_SDK_PATH=/run/build/musescore
       # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
-      - -DBUILD_CRASHPAD_CLIENT=OFF
-      - -DMUSESCORE_BUILD_CONFIG=release
+      - -DMUE_BUILD_CRASHPAD_CLIENT=OFF
     cleanup:
       # Delete the crashpad binary. It's useless.
       - /bin/crashpad_handler
@@ -99,7 +97,7 @@ modules:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/${FLATPAK_ID}.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-4.0/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-4.1/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -110,10 +108,11 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.0.tar.gz
-        sha256: 1384979d3a0c1c0e4c9f4f5f5f58aa7998ce7efd4408284e9f60345dce63eda3
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.1.0-beta.tar.gz
+        sha256: f8f049b2f867bddec1902bf1835a2518344ae99b8c0363bc1888ad688bc0e1a6
       - type: patch
         paths:
           - patches/musescore-mime-use-appid-icons.patch
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
+          - patches/musescore_simd_aarch64.patch
