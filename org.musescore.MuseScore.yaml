@@ -80,7 +80,6 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DMUSESCORE_BUILD_MODE=release
       - -DMUE_BUILD_UNIT_TESTS=OFF
-      # Upstream doesn't support Linux
       - -DMUE_BUILD_VST_MODULE=ON
       - -DVST3_SDK_PATH=/run/build/musescore/vst3sdk
       # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
