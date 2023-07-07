@@ -21,7 +21,7 @@ index 2ff55728b0..bdb3c4ace8 100644
      </kudos>
      <!-- Only <releases> below this point please! -->
      <releases>
-+        <release date="2023-06-28" version="4.1.0-beta" />
++        <release date="2023-07-07" version="4.1.0-rc" />
 +        <release date="2023-03-13" version="4.0.2" />
          <release date="2023-01-13" version="4.0.1">
              <url>https://musescore.org/en/4.0.1</url>
