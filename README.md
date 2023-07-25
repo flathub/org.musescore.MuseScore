@@ -16,8 +16,10 @@ Telemetry is disabled too.
 
 ## VST3 plugin support
 
-VST3 isn't supported on Linux by upstream. See issue:
-https://github.com/musescore/MuseScore/issues/11689
+4.1.0-beta added VST3 support on Linux.
+vst3sdk is added to the sources.
+A patch is necessary for the VST3_PATH as it uses the wrong defaults
+from the vst3sdk.
 
 ## Wayland
 
