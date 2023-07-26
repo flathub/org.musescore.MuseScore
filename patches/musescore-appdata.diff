@@ -17,10 +17,13 @@ index 2ff55728b0..bdb3c4ace8 100644
      <description>
          <p>MuseScore is cross-platform, multi-lingual, open source music notation software. It features an easy to use WYSIWYG editor with audio score playback for results that look and sound beautiful. It supports unlimited staves with up to four voices each, dynamics, articulations, lyrics, chords, lead sheet notation, import/export of MIDI and MusicXML, export to PDF and WAV, plus online score sharing.</p>
          <p>MuseScore can upload scores directly to the score sharing site musescore.com. Program support is provided on musescore.org.</p>
-@@ -115,6 +114,10 @@
+@@ -115,6 +114,13 @@
      </kudos>
      <!-- Only <releases> below this point please! -->
      <releases>
++        <release date="2023-07-26" version="4.1.1">
++            <url>https://github.com/musescore/MuseScore/releases/tag/v4.1.1</url>
++        </release>
 +        <release date="2023-07-12" version="4.1.0">
 +            <url>https://github.com/musescore/MuseScore/releases/tag/v4.1.0</url>
 +        </release>
