@@ -11,14 +11,12 @@ sdk: org.kde.Sdk
 command: mscore
 rename-icon: mscore
 copy-icon: true
+desktop-file-name-prefix: "(beta) "
 
 finish-args:
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
-  # Too many wayland bugs.
-  # --socket=wayland
-  - --env=QT_QPA_PLATFORM=xcb
   # MuseScore.com connectivity
   - --share=network
   # Note playback
@@ -47,7 +45,10 @@ add-extensions:
 cleanup-commands:
   # Cleanup after QtWebKit
   - rm -rf /app/include
+  - rm -fr /app/lib/pkgconfig /app/lib/mkspecs /app/lib/cmake
   - rm -rf /app/lib/${FLATPAK_ARCH}-linux-gnu/{cmake,mkspecs,pkgconfig}
+cleanup:
+  - /share/man
 modules:
   - name: portmidi
     buildsystem: cmake-ninja
@@ -78,6 +79,7 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DMUSESCORE_BUILD_MODE=release
+      - -DMUE_DOWNLOAD_SOUNDFONT=ON
       - -DMUE_BUILD_UNIT_TESTS=OFF
       - -DMUE_BUILD_VST_MODULE=ON
       - -DVST3_SDK_PATH=/run/build/musescore/vst3sdk
@@ -95,7 +97,7 @@ modules:
       - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/${FLATPAK_ID}.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-4.1/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-4.2/locale /app/share/mscore/translations
       # Add prefixes to mimetype icons so they can be exported
       # TODO: really, this bit could be nicer
       - cd /app/share/icons/hicolor;
@@ -106,8 +108,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.1.1.tar.gz
-        sha256: 3e53ce88b98c08422c8f8dc8c71c6e31d1038c2b263649f6647de6fa4269ce9b
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.2.0-beta.2.tar.gz
+        sha256: 948fc4d7a6460b47052b1ae694eb8172f0d85a503bf9702e589374a49f24176f
       - type: git
         url: https://github.com/steinbergmedia/vst3sdk.git
         tag: v3.7.8_build_34
@@ -118,7 +120,7 @@ modules:
           - patches/musescore-mime-use-appid-icons.patch
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
-          - patches/musescore_simd_aarch64.patch
+
       - type: patch
         options:
           - -d
