@@ -16,9 +16,6 @@ finish-args:
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
-  # Too many wayland bugs.
-  # --socket=wayland
-  - --env=QT_QPA_PLATFORM=xcb
   # MuseScore.com connectivity
   - --share=network
   # Note playback
