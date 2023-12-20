@@ -108,8 +108,8 @@ modules:
         done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.2.0-beta.2.tar.gz
-        sha256: 948fc4d7a6460b47052b1ae694eb8172f0d85a503bf9702e589374a49f24176f
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.2.0.tar.gz
+        sha256: 9db829e31da7a8ab845ae143bfd65d06bde5a9af80b5a65f778d91cc7d21d9f5
       - type: git
         url: https://github.com/steinbergmedia/vst3sdk.git
         tag: v3.7.8_build_34
