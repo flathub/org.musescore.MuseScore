@@ -1,36 +1,21 @@
----
 app-id: org.musescore.MuseScore
-
-base: io.qt.qtwebengine.BaseApp
-base-version: '5.15-23.08'
-
-runtime: org.kde.Platform
-runtime-version: '5.15-23.08'
-sdk: org.kde.Sdk
-
-command: mscore
-rename-icon: mscore
-copy-icon: true
+base-version: '23.08'
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: mscore.sh
 
 finish-args:
-  # X11 + XShm access
   - --share=ipc
   - --socket=x11
-  # MuseScore.com connectivity
   - --share=network
-  # Note playback
   - --socket=pulseaudio
-  # PortAudio/MIDI
   - --device=all
-  # Allow loading/saving files from anywhere
-  # (portals don’t work yet)
   - --filesystem=home
-  # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
-  # JACK
   - --filesystem=xdg-run/pipewire-0
-  # Allow UPower access
   - --system-talk-name=org.freedesktop.UPower
+  - --env=APPIMAGE_EXTRACT_AND_RUN=1
 
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
@@ -41,87 +26,22 @@ add-extensions:
     merge-dirs: vst3
     no-autodownload: true
     autodelete: false
-cleanup-commands:
-  # Cleanup after QtWebKit
-  - rm -rf /app/include
-  - rm -fr /app/lib/pkgconfig /app/lib/mkspecs /app/lib/cmake
-  - rm -rf /app/lib/${FLATPAK_ARCH}-linux-gnu/{cmake,mkspecs,pkgconfig}
-cleanup:
-  - /share/man
+
 modules:
-  - name: portmidi
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/app/lib
-      - -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=/app/lib
-      - -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app/bin
-    post-install:
-      # MuseScore looks for this name for some reason
-      - ln -s libportmidi.so /app/lib/libporttime.so
-    sources:
-      - type: archive
-        url: https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip
-        sha256: 08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f
-      - type: patch
-        path: patches/portmidi-no-java.patch
-    cleanup:
-      - /bin
-      - /lib/pkgconfig
-      - /include
-      - '*.a'
-      - '*.la'
-
   - name: musescore
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DMUSESCORE_BUILD_MODE=release
-      - -DMUE_DOWNLOAD_SOUNDFONT=ON
-      - -DMUE_BUILD_UNIT_TESTS=OFF
-      - -DMUE_BUILD_VST_MODULE=ON
-      - -DVST3_SDK_PATH=/run/build/musescore/vst3sdk
-      # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
-      - -DMUE_BUILD_CRASHPAD_CLIENT=OFF
-    cleanup:
-      # Delete the crashpad binary. It's useless.
-      - /bin/crashpad_handler
-      - /include
-      - /lib/cmake
-      - /lib/pkgconfig
-      - '*.a'
-    post-install:
-      - install -d /app/extensions/Plugins
-      - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/${FLATPAK_ID}.xml
-      # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
-      - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-4.2/locale /app/share/mscore/translations
-      # Add prefixes to mimetype icons so they can be exported
-      # TODO: really, this bit could be nicer
-      - cd /app/share/icons/hicolor;
-        for d in */mimetypes/; do
-          for f in ${d}*; do
-            mv "$f" "${d}org.musescore.MuseScore.$(basename $f)";
-          done;
-        done
-    sources:
-      - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.2.0.tar.gz
-        sha256: 9db829e31da7a8ab845ae143bfd65d06bde5a9af80b5a65f778d91cc7d21d9f5
-      - type: git
-        url: https://github.com/steinbergmedia/vst3sdk.git
-        tag: v3.7.8_build_34
-        commit: 0041ef2c879c3c54c03d33cdc11a97eaebfb5752
-        dest: vst3sdk
-      - type: patch
-        paths:
-          - patches/musescore-mime-use-appid-icons.patch
-          - patches/musescore-appdata.diff
-          - patches/musescore-fixes.patch
+    buildsystem: simple
+    build-commands:
+      - chmod +x musescore.AppImage
+      - ./musescore.AppImage --appimage-extract
+      - cp squashfs-root/org.musescore.MuseScore4portable.desktop org.musescore.Musescore.desktop
+      - install -Dm755 mscore.sh ${FLATPAK_DEST}/bin/mscore.sh
+      - mv squashfs-root ${FLATPAK_DEST}/mscore
+      - ls -l ${FLATPAK_DEST}/mscore/bin/mscore4portable
 
-      - type: patch
-        options:
-          - -d
-          - vst3sdk/public.sdk
-        path: patches/vst3_paths.patch
+    sources:
+      - type: file
+        path: mscore.sh
+      - type: file 
+        dest-filename: musescore.AppImage
+        url: https://github.com/musescore/MuseScore/releases/download/v4.2.1/MuseScore-4.2.1.240230938-x86_64.AppImage
+        sha256: 07b00a863299499cf6a9f25dab85efb11d086c8947d822018782aec905cbfa35
