@@ -84,6 +84,8 @@ modules:
       - -DVST3_SDK_PATH=/run/build/musescore/vst3sdk
       # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
       - -DMUE_BUILD_CRASHPAD_CLIENT=OFF
+      # disable in-app updater
+      - -DMUE_BUILD_UPDATE_MODULE=OFF
     cleanup:
       # Delete the crashpad binary. It's useless.
       - /bin/crashpad_handler
