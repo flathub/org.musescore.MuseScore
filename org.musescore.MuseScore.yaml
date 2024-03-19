@@ -80,6 +80,8 @@ modules:
       - -DMUSESCORE_BUILD_MODE=release
       - -DMUE_DOWNLOAD_SOUNDFONT=ON
       - -DMUE_BUILD_UNIT_TESTS=OFF
+      # Started failing to build when on
+      - -DMUE_COMPILE_USE_UNITY=OFF
       - -DMUE_BUILD_VST_MODULE=ON
       - -DVST3_SDK_PATH=/run/build/musescore/vst3sdk
       # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
@@ -119,6 +121,7 @@ modules:
           - patches/musescore-mime-use-appid-icons.patch
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
+          - patches/musescore-unity.patch
 
       - type: patch
         options:

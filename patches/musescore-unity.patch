@@ -1,0 +1,24 @@
+diff --git a/src/braille/internal/braillecode.cpp b/src/braille/internal/braillecode.cpp
+index 5e41f28546..5f15db3e9a 100644
+--- a/src/braille/internal/braillecode.cpp
++++ b/src/braille/internal/braillecode.cpp
+@@ -24,6 +24,7 @@
+ #include <sstream>
+ #include <vector>
+ 
++#include "log.h"
+ #include "braillecode.h"
+ 
+ namespace mu::engraving {
+diff --git a/src/importexport/musicxml/internal/musicxml/importmxmlpass1.cpp b/src/importexport/musicxml/internal/musicxml/importmxmlpass1.cpp
+index b8352d5bc2..8195211b85 100644
+--- a/src/importexport/musicxml/internal/musicxml/importmxmlpass1.cpp
++++ b/src/importexport/musicxml/internal/musicxml/importmxmlpass1.cpp
+@@ -23,6 +23,7 @@
+ #include <QRegularExpression>
+ 
+ #include "engraving/dom/box.h"
++#include "engraving/dom/bracketItem.h"
+ #include "engraving/dom/factory.h"
+ #include "engraving/dom/layoutbreak.h"
+ #include "engraving/dom/measure.h"
