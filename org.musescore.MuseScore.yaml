@@ -11,6 +11,10 @@ sdk: org.kde.Sdk
 command: mscore
 rename-icon: mscore
 copy-icon: true
+rename-mime-file: musescore.xml
+rename-mime-icons:
+  - application-x-musescore
+  - application-x-musescore+xml
 
 finish-args:
   # X11 + XShm access
@@ -95,22 +99,13 @@ modules:
       - '*.a'
     post-install:
       - install -d /app/extensions/Plugins
-      - mv /app/share/mime/packages/musescore.xml /app/share/mime/packages/${FLATPAK_ID}.xml
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
       - ln -s /app/share/mscore-4.2/locale /app/share/mscore/translations
-      # Add prefixes to mimetype icons so they can be exported
-      # TODO: really, this bit could be nicer
-      - cd /app/share/icons/hicolor;
-        for d in */mimetypes/; do
-          for f in ${d}*; do
-            mv "$f" "${d}org.musescore.MuseScore.$(basename $f)";
-          done;
-        done
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.2.1.tar.gz
-        sha256: 9636b303afdb44228dc6d64dbc14773b60840dec7225602d79b126d97f555680
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.3.0.tar.gz
+        sha256: 85ebd0130d70cda2b2ef166a0737b7aba31961779210f916bf37cb44b3f1e2a2
       - type: git
         url: https://github.com/steinbergmedia/vst3sdk.git
         tag: v3.7.8_build_34
@@ -118,10 +113,8 @@ modules:
         dest: vst3sdk
       - type: patch
         paths:
-          - patches/musescore-mime-use-appid-icons.patch
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
-
       - type: patch
         options:
           - -d
