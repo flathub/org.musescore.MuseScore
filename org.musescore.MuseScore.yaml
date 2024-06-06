@@ -104,8 +104,8 @@ modules:
       - ln -s /app/share/mscore-4.2/locale /app/share/mscore/translations
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.3.0.tar.gz
-        sha256: 85ebd0130d70cda2b2ef166a0737b7aba31961779210f916bf37cb44b3f1e2a2
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.3.1.tar.gz
+        sha256: 773072b254759fa6d8f2afd577848c00337a083807b46c0f47dea676a7c2f1b7
       - type: git
         url: https://github.com/steinbergmedia/vst3sdk.git
         tag: v3.7.8_build_34
