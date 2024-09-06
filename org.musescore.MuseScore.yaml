@@ -2,10 +2,10 @@
 app-id: org.musescore.MuseScore
 
 base: io.qt.qtwebengine.BaseApp
-base-version: '5.15-23.08'
+base-version: '6.7'
 
 runtime: org.kde.Platform
-runtime-version: '5.15-23.08'
+runtime-version: '6.7'
 sdk: org.kde.Sdk
 
 command: mscore
@@ -81,7 +81,7 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DMUSESCORE_BUILD_MODE=release
+      - -DMUSE_APP_BUILD_MODE=release
       - -DMUE_DOWNLOAD_SOUNDFONT=ON
       - -DMUE_BUILD_UNIT_TESTS=OFF
       - -DMUE_BUILD_VST_MODULE=ON
@@ -90,6 +90,8 @@ modules:
       - -DMUE_BUILD_CRASHPAD_CLIENT=OFF
       # disable in-app updater
       - -DMUE_BUILD_UPDATE_MODULE=OFF
+      # See: https://github.com/musescore/MuseScore/commit/696279e362afe72db5e92f8a47aa64b3a0e86a86
+      - -DMUE_COMPILE_USE_SYSTEM_HARFBUZZ=ON
     cleanup:
       # Delete the crashpad binary. It's useless.
       - /bin/crashpad_handler
@@ -104,8 +106,8 @@ modules:
       - ln -s /app/share/mscore-4.2/locale /app/share/mscore/translations
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.3.2.tar.gz
-        sha256: 897512c7a39850457d6f1e456537e7a9a9e9acc849d7553781ba1125b5110ee0
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.4.1.tar.gz
+        sha256: c2c747362e5a7eedfc9be86237e7bb52ca23fdb42c38fcf9ea37fbad1ed3ddb5
       - type: git
         url: https://github.com/steinbergmedia/vst3sdk.git
         tag: v3.7.8_build_34
@@ -113,6 +115,7 @@ modules:
         dest: vst3sdk
       - type: patch
         paths:
+          - patches/24326.patch
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
       - type: patch
