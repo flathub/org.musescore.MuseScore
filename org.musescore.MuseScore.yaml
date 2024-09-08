@@ -83,13 +83,14 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DMUSE_APP_BUILD_MODE=release
       - -DMUE_DOWNLOAD_SOUNDFONT=ON
-      - -DMUE_BUILD_UNIT_TESTS=OFF
-      - -DMUE_BUILD_VST_MODULE=ON
-      - -DVST3_SDK_PATH=/run/build/musescore/vst3sdk
+      - -DMUSE_ENABLE_UNIT_TESTS=OFF
+      - -DMUSE_MODULE_VST=ON
+      - -DMUSE_MODULE_VST_VST3_SDK_PATH=/run/build/musescore/vst3sdk
+      - -DMUSE_COMPILE_ASAN=ON
       # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
-      - -DMUE_BUILD_CRASHPAD_CLIENT=OFF
+      - -DMUSE_MODULE_DIAGNOSTICS_CRASHPAD_CLIENT=OFF
       # disable in-app updater
-      - -DMUE_BUILD_UPDATE_MODULE=OFF
+      - -DMUSE_MODULE_UPDATE=OFF
       # See: https://github.com/musescore/MuseScore/commit/696279e362afe72db5e92f8a47aa64b3a0e86a86
       - -DMUE_COMPILE_USE_SYSTEM_HARFBUZZ=ON
     cleanup:
@@ -103,7 +104,7 @@ modules:
       - install -d /app/extensions/Plugins
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-4.2/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-4.4/locale /app/share/mscore/translations
     sources:
       - type: archive
         url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.4.1.tar.gz
