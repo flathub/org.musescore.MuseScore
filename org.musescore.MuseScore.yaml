@@ -103,11 +103,11 @@ modules:
       - install -d /app/extensions/Plugins
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-4.2/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-4.4/locale /app/share/mscore/translations
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.4.1.tar.gz
-        sha256: c2c747362e5a7eedfc9be86237e7bb52ca23fdb42c38fcf9ea37fbad1ed3ddb5
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.4.2.tar.gz
+        sha256: e347c05129e647b1ae74608bfd4f4b423077c1ba633688c6b633a8b40e5dba51
       - type: git
         url: https://github.com/steinbergmedia/vst3sdk.git
         tag: v3.7.8_build_34
@@ -116,6 +116,7 @@ modules:
       - type: patch
         paths:
           - patches/24326.patch
+          - patches/24714.patch
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
       - type: patch
