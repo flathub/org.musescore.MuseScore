@@ -17,23 +17,18 @@ rename-mime-icons:
   - application-x-musescore+xml
 
 finish-args:
-  # X11 + XShm access
   - --share=ipc
   - --socket=x11
   # MuseScore.com connectivity
   - --share=network
-  # Note playback
   - --socket=pulseaudio
-  # PortAudio/MIDI
-  - --device=all
+  - --device=dri
   # Allow loading/saving files from anywhere
   # (portals don’t work yet)
   - --filesystem=home
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
-  # JACK
   - --filesystem=xdg-run/pipewire-0
-  # Allow UPower access
   - --system-talk-name=org.freedesktop.UPower
 
 add-extensions:
