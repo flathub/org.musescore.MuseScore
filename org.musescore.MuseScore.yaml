@@ -22,6 +22,7 @@ finish-args:
   # MuseScore.com connectivity
   - --share=network
   - --socket=pulseaudio
+  - --socket=cups
   - --device=dri
   # Allow loading/saving files from anywhere
   # (portals don’t work yet)
