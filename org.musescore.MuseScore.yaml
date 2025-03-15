@@ -32,15 +32,6 @@ finish-args:
   - --filesystem=xdg-run/pipewire-0
   - --system-talk-name=org.freedesktop.UPower
 
-add-extensions:
-  org.freedesktop.LinuxAudio.Plugins:
-    directory: extensions/Plugins
-    version: '24.08'
-    add-ld-path: lib
-    subdirectories: true
-    merge-dirs: vst3
-    no-autodownload: true
-    autodelete: false
 cleanup-commands:
   # Cleanup after QtWebKit
   - rm -rf /app/include
@@ -77,13 +68,7 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DMUSE_APP_BUILD_MODE=release
       - -DMUE_DOWNLOAD_SOUNDFONT=ON
-      - -DMUE_BUILD_UNIT_TESTS=OFF
-      - -DMUE_BUILD_VST_MODULE=ON
-      - -DVST3_SDK_PATH=/run/build/musescore/vst3sdk
-      # thid is a stupidly pre-compiled binary that doesn't work with openSSL 3
-      - -DMUE_BUILD_CRASHPAD_CLIENT=OFF
-      # disable in-app updater
-      - -DMUE_BUILD_UPDATE_MODULE=OFF
+      - -DMUSE_ENABLE_UNIT_TESTS=OFF
       # See: https://github.com/musescore/MuseScore/commit/696279e362afe72db5e92f8a47aa64b3a0e86a86
       - -DMUE_COMPILE_USE_SYSTEM_HARFBUZZ=ON
     cleanup:
@@ -94,25 +79,21 @@ modules:
       - /lib/pkgconfig
       - '*.a'
     post-install:
+      # Resize icons
+      # See https://github.com/musescore/MuseScore/issues/27131
+      - rm $FLATPAK_DEST/share/icons/hicolor/512x512/mimetypes/application-x-musescore*.png
+      - ffmpeg -i ../share/icons/MsczIcon/MS4_MsczIcon.png -s "512x512" $FLATPAK_DEST/share/icons/hicolor/512x512/mimetypes/application-x-musescore.png
+      - ffmpeg -i ../share/icons/MscxIcon/MS4_MscxIcon.png -s "512x512" $FLATPAK_DEST/share/icons/hicolor/512x512/mimetypes/application-x-musescore+xml.png
       - install -d /app/extensions/Plugins
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
-      - mkdir /app/share/mscore -p
-      - ln -s /app/share/mscore-4.4/locale /app/share/mscore/translations
+      - install -d /app/share/mscore
+      - ln -s /app/share/mscore-4.5/locale /app/share/mscore/translations
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.4.4.tar.gz
-        sha256: 13d78c168bbe43e6b9bb213d03cabc727615b7e638a4ef037ef819efd2b4109b
-      - type: git
-        url: https://github.com/steinbergmedia/vst3sdk.git
-        tag: v3.7.8_build_34
-        commit: 0041ef2c879c3c54c03d33cdc11a97eaebfb5752
-        dest: vst3sdk
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.5.tar.gz
+        sha256: 13807e7970bb7506d1e06ce32798b020609409c96f4f0b9ff3b41ced596e74fd
       - type: patch
         paths:
+          # See https://github.com/musescore/MuseScore/issues/27132
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
-      - type: patch
-        options:
-          - -d
-          - vst3sdk/public.sdk
-        path: patches/vst3_paths.patch
