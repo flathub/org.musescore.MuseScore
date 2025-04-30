@@ -79,19 +79,14 @@ modules:
       - /lib/pkgconfig
       - '*.a'
     post-install:
-      # Resize icons
-      # See https://github.com/musescore/MuseScore/issues/27131
-      - rm $FLATPAK_DEST/share/icons/hicolor/512x512/mimetypes/application-x-musescore*.png
-      - ffmpeg -i ../share/icons/MsczIcon/MS4_MsczIcon.png -s "512x512" $FLATPAK_DEST/share/icons/hicolor/512x512/mimetypes/application-x-musescore.png
-      - ffmpeg -i ../share/icons/MscxIcon/MS4_MscxIcon.png -s "512x512" $FLATPAK_DEST/share/icons/hicolor/512x512/mimetypes/application-x-musescore+xml.png
       - install -d /app/extensions/Plugins
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - install -d /app/share/mscore
       - ln -s /app/share/mscore-4.5/locale /app/share/mscore/translations
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.5.tar.gz
-        sha256: 13807e7970bb7506d1e06ce32798b020609409c96f4f0b9ff3b41ced596e74fd
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.5.1.tar.gz
+        sha256: 5ec033770599ee42ebc00e1a8c680b78de7ac871a0fa6484a68544653171b9ae
       - type: patch
         paths:
           # See https://github.com/musescore/MuseScore/issues/27132
