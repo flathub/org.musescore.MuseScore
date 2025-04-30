@@ -7,23 +7,26 @@ Some packaging notes. Please keep up to date.
 
 The beta branch is used for pre-release and testing.
 
-## Crashpad
-
-Crashpad is disabled because it comes as a binary linked against an
-older openSSL. (it's not available on aarch64 anyway)
+## Telemetry
 
 Telemetry is disabled too.
 
 ## VST3 plugin support
 
-4.1.0-beta added VST3 support on Linux.
-vst3sdk is added to the sources.
-A patch is necessary for the VST3_PATH as it uses the wrong defaults
-from the vst3sdk.
+There is no VST support on Linux. This is a MuseScore problem and it
+seem to not be a priority as releases pass and nothing changes.
+
+See upstream bugs:
+
+- https://github.com/musescore/MuseScore/issues/11689
+- https://github.com/musescore/MuseScore/issues/16799
+
+> The plan is to implement this for 4.1.
 
 ## Wayland
 
-Wayland support is buggy in Qt5. It's disabled.
+Wayland support is buggy in Qt. It's disabled. Also if VST support
+ever comes it won't even be possible either.
 
 ## Network access
 
