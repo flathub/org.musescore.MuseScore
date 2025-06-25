@@ -85,8 +85,8 @@ modules:
       - ln -s /app/share/mscore-4.5/locale /app/share/mscore/translations
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.5.1.tar.gz
-        sha256: 5ec033770599ee42ebc00e1a8c680b78de7ac871a0fa6484a68544653171b9ae
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.5.2.tar.gz
+        sha256: 62e879ebc39b34612b2b4aa67b51ab7a75e465772eb7e5a1dbc137f902c91b39
       - type: patch
         paths:
           # See https://github.com/musescore/MuseScore/issues/27132
