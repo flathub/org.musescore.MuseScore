@@ -29,6 +29,7 @@ finish-args:
   - --filesystem=home
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
+  - --env=QT_QPA_PLATFORM=xcb
   - --filesystem=xdg-run/pipewire-0
   - --system-talk-name=org.freedesktop.UPower
 
