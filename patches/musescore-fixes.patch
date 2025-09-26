@@ -1,26 +1,18 @@
 diff --git a/src/framework/vst/CMakeLists.txt b/src/framework/vst/CMakeLists.txt
-index 368d686b53..7c0201a7dd 100644
+index 196fff93b7..15c5834534 100644
 --- a/src/framework/vst/CMakeLists.txt
 +++ b/src/framework/vst/CMakeLists.txt
-@@ -87,7 +87,6 @@ set(MODULE_LINK
- if (OS_IS_LIN)
-     set(MODULE_LINK
-         ${MODULE_LINK}
+@@ -104,13 +104,6 @@ set(MODULE_LINK
+     vst_sdk_3
+     )
+ 
+-if (OS_IS_LIN)
+-    set(MODULE_LINK
+-        ${MODULE_LINK}
 -        stdc++fs
-         )
+-        )
+-endif()
+-
+ if (QT_SUPPORT)
+     list(APPEND MODULE_LINK Qt::Qml Qt::Widgets)
  endif()
- 
-diff --git a/src/framework/vst/internal/vstconfiguration.cpp b/src/framework/vst/internal/vstconfiguration.cpp
-index 838f00f2af..5d4a3dd559 100644
---- a/src/framework/vst/internal/vstconfiguration.cpp
-+++ b/src/framework/vst/internal/vstconfiguration.cpp
-@@ -34,7 +34,8 @@ static const mu::io::path_t KNOWN_PLUGINS_DIR("/vst");
- 
- void VstConfiguration::init()
- {
--    settings()->setDefaultValue(USER_VST_PATHS, Val(""));
-+    auto vst3Path = getenv("VST3_PATH");
-+    settings()->setDefaultValue(USER_VST_PATHS, Val(vst3Path ? vst3Path : ""));
-     settings()->valueChanged(USER_VST_PATHS).onReceive(nullptr, [this](const Val&) {
-         m_userVstDirsChanged.send(userVstDirectories());
-     });
