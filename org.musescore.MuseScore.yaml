@@ -1,6 +1,5 @@
 ---
-app-id: org.musescore.MuseScore
-
+id: org.musescore.MuseScore
 runtime: org.kde.Platform
 runtime-version: '6.9'
 sdk: org.kde.Sdk
@@ -29,8 +28,18 @@ finish-args:
   - --filesystem=xdg-run/pipewire-0
   - --system-talk-name=org.freedesktop.UPower
 
+add-extensions:
+  org.freedesktop.LinuxAudio.Plugins:
+    directory: extensions/Plugins
+    version: "24.08"
+    add-ld-path: lib
+    merge-dirs: vst3
+    subdirectories: true
+    no-autodownload: true
+
 cleanup:
   - /share/man
+
 modules:
   - name: musescore
     buildsystem: cmake-ninja
@@ -38,8 +47,10 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DMUSE_APP_BUILD_MODE=release
-      - -DMUE_DOWNLOAD_SOUNDFONT=ON
       - -DMUSE_ENABLE_UNIT_TESTS=OFF
+      - -DMUSE_MODULE_VST=ON
+      - -DMUSE_MODULE_VST_VST3_SDK_PATH=../vst3sdk
+      - -DMUSE_MODULE_NETWORK_WEBSOCKET=ON
       # See: https://github.com/musescore/MuseScore/commit/696279e362afe72db5e92f8a47aa64b3a0e86a86
       - -DMUE_COMPILE_USE_SYSTEM_HARFBUZZ=ON
     cleanup:
@@ -51,15 +62,21 @@ modules:
       - install -d /app/extensions/Plugins
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - install -d /app/share/mscore
-      - ln -s /app/share/mscore-4.5/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-4.6/locale /app/share/mscore/translations
     sources:
+      - type: git
+        url: https://github.com/steinbergmedia/vst3sdk.git
+        tag: v3.7.12_build_20
+        commit: cc2adc90382dded9e347caf74e4532f1458715db
+        dest: vst3sdk
+      - type: patch
+        path: patches/vst3sdk_paths.patch
+        options: ["--directory=vst3sdk"]
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.5.2.tar.gz
-        sha256: 62e879ebc39b34612b2b4aa67b51ab7a75e465772eb7e5a1dbc137f902c91b39
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.6.0.tar.gz
+        sha256: 29eb41ef6097537ead5569dbb9fe091b251649bba8a1867e2bf0cc416b86f5a0
       - type: patch
         paths:
           # See https://github.com/musescore/MuseScore/issues/27132
-          - patches/musescore-appdata.diff
+          - patches/musescore-appdata.patch
           - patches/musescore-fixes.patch
-          - patches/01-musescore-qt69-build-fix.patch
-          - patches/02-musescore-qt69-build-fix.patch
