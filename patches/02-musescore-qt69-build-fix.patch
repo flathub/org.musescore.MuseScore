@@ -1,0 +1,22 @@
+From c537785a6ff098ffd8a87597a0d073e40794afe7 Mon Sep 17 00:00:00 2001
+From: Casper Jeukendrup <48658420+cbjeukendrup@users.noreply.github.com>
+Date: Wed, 2 Apr 2025 23:02:47 +0200
+Subject: [PATCH] Build fixes for Qt 6.9
+
+---
+ src/palette/view/widgets/specialcharactersdialog.cpp | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/palette/view/widgets/specialcharactersdialog.cpp b/src/palette/view/widgets/specialcharactersdialog.cpp
+index 2fe07bdb8f84e..96c0f6960fd4b 100644
+--- a/src/palette/view/widgets/specialcharactersdialog.cpp
++++ b/src/palette/view/widgets/specialcharactersdialog.cpp
+@@ -712,7 +712,7 @@ void SpecialCharactersDialog::populateUnicode()
+         std::shared_ptr<FSymbol> fs = std::make_shared<FSymbol>(gpaletteScore->dummy());
+         fs->setCode(code);
+         fs->setFont(m_font);
+-        m_pUnicode->appendElement(fs, QString("0x%1").arg(code, 5, 16, QLatin1Char('0')));
++        m_pUnicode->appendElement(fs, QString("0x%1").arg(static_cast<int>(code), 5, 16, u'0'));
+     }
+ }
+ 

@@ -1,11 +1,8 @@
 ---
 app-id: org.musescore.MuseScore
 
-base: io.qt.qtwebengine.BaseApp
-base-version: '6.8'
-
 runtime: org.kde.Platform
-runtime-version: '6.8'
+runtime-version: '6.9'
 sdk: org.kde.Sdk
 
 command: mscore
@@ -32,35 +29,9 @@ finish-args:
   - --filesystem=xdg-run/pipewire-0
   - --system-talk-name=org.freedesktop.UPower
 
-cleanup-commands:
-  # Cleanup after QtWebKit
-  - rm -rf /app/include
-  - rm -fr /app/lib/pkgconfig /app/lib/mkspecs /app/lib/cmake
-  - rm -rf /app/lib/${FLATPAK_ARCH}-linux-gnu/{cmake,mkspecs,pkgconfig}
 cleanup:
   - /share/man
 modules:
-  - name: portmidi
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/app/lib
-      - -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=/app/lib
-      - -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app/bin
-    post-install:
-      # MuseScore looks for this name for some reason
-      - ln -s libportmidi.so /app/lib/libporttime.so
-    sources:
-      - type: archive
-        url: https://sourceforge.net/projects/portmedia/files/portmidi/v2.0.2/portmidi-v2.0.2.zip
-        sha256: 322cbdfbb3af752ae46acd0134d17fe7c5c8b4a8e802486fd1ef46bb3d571a98
-    cleanup:
-      - /bin
-      - /lib/pkgconfig
-      - /include
-      - '*.a'
-      - '*.la'
-
   - name: musescore
     buildsystem: cmake-ninja
     builddir: true
@@ -72,8 +43,6 @@ modules:
       # See: https://github.com/musescore/MuseScore/commit/696279e362afe72db5e92f8a47aa64b3a0e86a86
       - -DMUE_COMPILE_USE_SYSTEM_HARFBUZZ=ON
     cleanup:
-      # Delete the crashpad binary. It's useless.
-      - /bin/crashpad_handler
       - /include
       - /lib/cmake
       - /lib/pkgconfig
@@ -85,10 +54,12 @@ modules:
       - ln -s /app/share/mscore-4.5/locale /app/share/mscore/translations
     sources:
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.5.1.tar.gz
-        sha256: 5ec033770599ee42ebc00e1a8c680b78de7ac871a0fa6484a68544653171b9ae
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.5.2.tar.gz
+        sha256: 62e879ebc39b34612b2b4aa67b51ab7a75e465772eb7e5a1dbc137f902c91b39
       - type: patch
         paths:
           # See https://github.com/musescore/MuseScore/issues/27132
           - patches/musescore-appdata.diff
           - patches/musescore-fixes.patch
+          - patches/01-musescore-qt69-build-fix.patch
+          - patches/02-musescore-qt69-build-fix.patch
