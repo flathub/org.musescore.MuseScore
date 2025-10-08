@@ -73,10 +73,7 @@ modules:
         path: patches/vst3sdk_paths.patch
         options: ["--directory=vst3sdk"]
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.6.0.tar.gz
-        sha256: 29eb41ef6097537ead5569dbb9fe091b251649bba8a1867e2bf0cc416b86f5a0
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.6.1.tar.gz
+        sha256: dcb975dd8558f0a8cb9705a5d76b6f0cc7452177aab1eff3c6b929c8c859ccf0
       - type: patch
-        paths:
-          # See https://github.com/musescore/MuseScore/issues/27132
-          - patches/musescore-appdata.patch
-          - patches/musescore-fixes.patch
+        path: patches/musescore-fixes.patch
