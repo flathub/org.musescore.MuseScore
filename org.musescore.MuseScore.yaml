@@ -31,7 +31,7 @@ finish-args:
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    version: "24.08"
+    version: '24.08'
     add-ld-path: lib
     merge-dirs: vst3
     subdirectories: true
@@ -66,15 +66,26 @@ modules:
     sources:
       - type: git
         url: https://github.com/steinbergmedia/vst3sdk.git
-        tag: v3.7.12_build_20
-        commit: cc2adc90382dded9e347caf74e4532f1458715db
+        tag: v3.8.0_build_66
+        commit: 9fad9770f2ae8542ab1a548a68c1ad1ac690abe0
         dest: vst3sdk
+        x-checker-data:
+          type: git
+          tag-pattern: ^v(\d+.\d+.\d+_build_\d+)$
       - type: patch
         path: patches/vst3sdk_paths.patch
-        options: 
+        options:
           - --directory=vst3sdk
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.6.2.tar.gz
-        sha256: 036275481bf8fe2af3010ec0cd20023b2ccc2ba35c31b6bc3ce4f95d0b601864
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.6.3.tar.gz
+        sha256: 507f4e8566b693fe27b08ea3e5861a0fe1cecf3bbc72cbac13657bd4f49234d5
+        x-checker-data:
+          is-main-source: true
+          type: json
+          url: https://api.github.com/repos/musescore/MuseScore/releases/latest
+          version-query: .tag_name
+          url-query: |
+            "https://github.com/musescore/MuseScore/archive/refs/tags/" + $version + ".tar.gz"
+          timestamp-query: .published_at
       - type: patch
         path: patches/musescore-fixes.patch
