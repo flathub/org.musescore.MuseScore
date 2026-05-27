@@ -38,9 +38,68 @@ add-extensions:
     no-autodownload: true
 
 cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
   - /share/man
+  - /share/pkgconfig
+  - '*.a'
 
 modules:
+  - name: mnxdom
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DMNX_W3C_SOURCE=mnx_w3c
+      - -DBUILD_SHARED_LIBS=ON
+      - -DUSE_SYSTEM_NLOHMANN_JSON=ON
+      - -DUSE_SYSTEM_JSON_SCHEMA_VALIDATOR=ON
+      - -Dmnxdom_BUILD_TESTING=OFF
+    sources:
+      - type: git
+        url: https://github.com/rpatters1/mnxdom.git
+        commit: e7c947bf768caccf315426dcae0dfac02caf738b
+      - type: git
+        url: https://github.com/w3c/mnx.git
+        commit: aedba3a3740ffbb6ae9befa2ef0bb3e0226e5f7c
+        dest: mnx_w3c
+    modules:
+      - name: xxd
+        buildsystem: simple
+        build-commands:
+          - make
+          - install -Dm755 tinyxxd "${FLATPAK_DEST}/bin/xxd"
+        cleanup:
+          - '*'
+        sources:
+          - type: git
+            url: https://github.com/xyproto/tinyxxd/
+            tag: v1.3.16
+            commit: 2d693356bc7a9c655abb6c1dd1f1ace40ebb918d
+      - name: nlohmann-json
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=Release
+          - -DJSON_BuildTests=OFF
+          - -DJSON_MultipleHeaders=ON
+          - -DJSON_SystemInclude=ON
+        sources:
+          - type: archive
+            url: https://github.com/nlohmann/json/archive/v3.12.0.tar.gz
+            sha256: 4b92eb0c06d10683f7447ce9406cb97cd4b453be18d7279320f7b2f025c10187
+      - name: json-validator
+        buildsystem: cmake-ninja
+        build-options:
+          cflags: -fPIC -fpic
+          cxxflags: -fPIC -fpic
+        config-opts:
+          - -DJSON_VALIDATOR_BUILD_TESTS=OFF
+          - -DJSON_VALIDATOR_SHARED_LIBS=ON
+        sources:
+          - type: git
+            url: https://github.com/pboettch/json-schema-validator/
+            commit: c780404a84dd9ba978ba26bc58d17cb43fa7bc80
+            tag: '2.4.0'
+
   - name: musescore
     buildsystem: cmake-ninja
     builddir: true
@@ -51,6 +110,7 @@ modules:
       - -DMUSE_MODULE_VST=ON
       - -DMUSE_MODULE_VST_VST3_SDK_PATH=../vst3sdk
       - -DMUSE_MODULE_NETWORK_WEBSOCKET=ON
+      - -DMUE_COMPILE_USE_SYSTEM_MNXDOM=ON
       # See: https://github.com/musescore/MuseScore/commit/696279e362afe72db5e92f8a47aa64b3a0e86a86
       - -DMUE_COMPILE_USE_SYSTEM_HARFBUZZ=ON
     cleanup:
@@ -62,7 +122,7 @@ modules:
       - install -d /app/extensions/Plugins
       # https://github.com/hughsie/appstream-glib/blob/master/libappstream-glib/as-app-builder.c#L374
       - install -d /app/share/mscore
-      - ln -s /app/share/mscore-4.6/locale /app/share/mscore/translations
+      - ln -s /app/share/mscore-4.7/locale /app/share/mscore/translations
     sources:
       - type: git
         url: https://github.com/steinbergmedia/vst3sdk.git
@@ -71,10 +131,10 @@ modules:
         dest: vst3sdk
       - type: patch
         path: patches/vst3sdk_paths.patch
-        options: 
+        options:
           - --directory=vst3sdk
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.6.3.tar.gz
-        sha256: 507f4e8566b693fe27b08ea3e5861a0fe1cecf3bbc72cbac13657bd4f49234d5
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.7.4.tar.gz
+        sha256: 1673de58484a07647e41d12141793d2bb1e63072d8fd9f659b95d7ebf873577f
       - type: patch
-        path: patches/musescore-fixes.patch
+        path: patches/musescore-appdata.patch
