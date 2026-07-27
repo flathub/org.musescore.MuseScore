@@ -2,10 +2,13 @@ diff --git a/buildscripts/packaging/Linux+BSD/org.musescore.MuseScore.appdata.xm
 index 7cc62663a3..7157d0b429 100644
 --- a/buildscripts/packaging/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
 +++ b/buildscripts/packaging/Linux+BSD/org.musescore.MuseScore.appdata.xml.in
-@@ -116,6 +116,15 @@
+@@ -116,6 +116,18 @@
      </kudos>
      <!-- Only <releases> below this point please! -->
      <releases>
++        <release date="2026-07-07" version="4.7.4">
++            <url>https://musescore.org/en/4.7.4</url>
++        </release>
 +        <release date="2026-06-11" version="4.7.3">
 +            <url>https://musescore.org/en/4.7.3</url>
 +        </release>
