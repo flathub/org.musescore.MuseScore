@@ -134,7 +134,7 @@ modules:
         options:
           - --directory=vst3sdk
       - type: archive
-        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.7.4.tar.gz
-        sha256: 1673de58484a07647e41d12141793d2bb1e63072d8fd9f659b95d7ebf873577f
+        url: https://github.com/musescore/MuseScore/archive/refs/tags/v4.7.5.tar.gz
+        sha256: b9db52e139e925adfc56e3ab59244f44da4db7e5e133d5084c5da5dfc3dfb9d1
       - type: patch
         path: patches/musescore-appdata.patch
