@@ -1,7 +1,7 @@
 ---
 id: org.musescore.MuseScore
 runtime: org.kde.Platform
-runtime-version: '6.11'
+runtime-version: '6.9'
 sdk: org.kde.Sdk
 
 command: mscore
@@ -31,7 +31,7 @@ finish-args:
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    version: "25.08"
+    version: "24.08"
     add-ld-path: lib
     merge-dirs: vst3
     subdirectories: true
