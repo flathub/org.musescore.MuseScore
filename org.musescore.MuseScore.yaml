@@ -1,7 +1,7 @@
 ---
 id: org.musescore.MuseScore
 runtime: org.kde.Platform
-runtime-version: '6.9'
+runtime-version: '6.11'
 sdk: org.kde.Sdk
 
 command: mscore
@@ -25,13 +25,13 @@ finish-args:
   - --filesystem=home
   # Allow other instances to see lockfiles
   - --env=TMPDIR=/var/tmp
-  - --filesystem=xdg-run/pipewire-0
+  - --filesystem=xdg-run/pipewire-0:ro
   - --system-talk-name=org.freedesktop.UPower
 
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    version: "24.08"
+    version: "25.08"
     add-ld-path: lib
     merge-dirs: vst3
     subdirectories: true
